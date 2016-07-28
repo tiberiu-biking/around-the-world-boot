@@ -1,0 +1,4 @@
+master/pam/foursquare/api/impl/FoursquareSource.class
+master/pam/foursquare/api/IFoursquareSource.class
+master/pam/foursquare/api/constants/FoursquareConstants.class
+master/pam/foursquare/api/FoursquareUtil.class

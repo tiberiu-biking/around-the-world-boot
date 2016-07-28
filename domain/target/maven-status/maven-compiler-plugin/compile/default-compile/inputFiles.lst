@@ -1,0 +1,15 @@
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/geo/GeoPoint.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/base/IdDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/impl/AddressDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/notifications/NotificationPool.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/base/IIdDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/impl/UserDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/api/ITimelineItemDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/timeline/TimelineItemDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/api/IMarkerDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/spring/SpringContext.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/gson/GsonHelper.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/api/IUserDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/date/DateFormatUtil.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/api/IAddressDto.java
+/Users/Tiberiu/Dev/workspace/github/around-the-world-boot/domain/src/main/java/master/pam/crosscutting/dto/impl/MarkerDto.java

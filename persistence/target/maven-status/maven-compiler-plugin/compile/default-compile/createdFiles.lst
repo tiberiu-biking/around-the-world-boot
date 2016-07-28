@@ -1,0 +1,16 @@
+master/pam/crud/impl/iface/ICrud.class
+master/pam/crud/impl/entity/base/IdEntity.class
+master/pam/crud/impl/filter/FilterBuilderConstants.class
+master/pam/crud/api/dao/IUserDao.class
+master/pam/crud/impl/entity/business/PasswordEntity.class
+master/pam/crud/api/dao/IMarkerDao.class
+master/pam/crud/impl/entity/business/UserEntity.class
+master/pam/crud/api/dao/IPasswordDao.class
+master/pam/crud/impl/dao/base/BaseDao.class
+master/pam/crud/impl/dao/UserDao.class
+master/pam/crud/impl/entity/manager/JpaEntityManager.class
+master/pam/crud/impl/filter/FilterBuilder.class
+master/pam/crud/impl/dao/PasswordDao.class
+master/pam/crud/impl/CrudImpl.class
+master/pam/crud/impl/dao/MarkerDao.class
+master/pam/crud/impl/entity/business/MarkerEntity.class

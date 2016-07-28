@@ -1,0 +1,6 @@
+com/master/pam/dropbox/gson/PhotoInfo.class
+com/master/pam/dropbox/gson/MediaInfoMetadata.class
+com/master/pam/dropbox/api/IDropboxSource.class
+com/master/pam/dropbox/constants/DropboxConstants.class
+com/master/pam/dropbox/api/impl/DropboxSource.class
+com/master/pam/dropbox/MetadataRequestHandler.class

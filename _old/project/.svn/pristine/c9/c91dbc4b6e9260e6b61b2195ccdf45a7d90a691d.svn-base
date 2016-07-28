@@ -1,0 +1,12 @@
+package com.master.pam.geo.coding.api;
+
+import java.math.BigDecimal;
+
+import master.pam.crosscutting.dto.api.IAddressDto;
+import master.pam.crosscutting.geo.GeoPoint;
+
+public interface IGeoCodingAPI {
+  public IAddressDto getAddress( BigDecimal aLatitude, BigDecimal aLongitude );
+
+  public IAddressDto getAddress( GeoPoint aGeoPoint );
+}

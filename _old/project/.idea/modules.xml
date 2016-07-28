@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cross-cutting/cross-cutting.iml" filepath="$PROJECT_DIR$/cross-cutting/cross-cutting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crud-helper/crud-helper.iml" filepath="$PROJECT_DIR$/crud-helper/crud-helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dropbox/dropbox.iml" filepath="$PROJECT_DIR$/dropbox/dropbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/encrypt/encrypt.iml" filepath="$PROJECT_DIR$/encrypt/encrypt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foursquare/foursquare.iml" filepath="$PROJECT_DIR$/foursquare/foursquare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geo-coding/geo-coding.iml" filepath="$PROJECT_DIR$/geo-coding/geo-coding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geo-tagging/geo-tagging.iml" filepath="$PROJECT_DIR$/geo-tagging/geo-tagging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/new-world/new-world.iml" filepath="$PROJECT_DIR$/new-world/new-world.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/world/world.iml" filepath="$PROJECT_DIR$/world/world.iml" />
+    </modules>
+  </component>
+</project>
+

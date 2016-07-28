@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/around-the-world-boot.iml" filepath="$PROJECT_DIR$/around-the-world-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dropbox/dropbox.iml" filepath="$PROJECT_DIR$/dropbox/dropbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/encryption/encryption.iml" filepath="$PROJECT_DIR$/encryption/encryption.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foursquare/foursquare.iml" filepath="$PROJECT_DIR$/foursquare/foursquare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geo-api/geo-api.iml" filepath="$PROJECT_DIR$/geo-api/geo-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jaxb/jaxb.iml" filepath="$PROJECT_DIR$/jaxb/jaxb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/persistence.iml" filepath="$PROJECT_DIR$/persistence/persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/world/world.iml" filepath="$PROJECT_DIR$/world/world.iml" />
+    </modules>
+  </component>
+</project>
