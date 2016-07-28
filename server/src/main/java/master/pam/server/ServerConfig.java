@@ -6,6 +6,7 @@ import master.pam.crud.api.dao.IMarkerDao;
 import master.pam.crud.api.dao.IPasswordDao;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.server.api.server.IServer;
+import master.pam.server.config.ApisConfig;
 import master.pam.server.impl.request.RequestFactory;
 import master.pam.server.impl.server.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,18 @@ import org.springframework.context.annotation.Import;
  * @since 28/07/16.
  */
 @Configuration
-@Import(PersistenceConfig.class)
+@Import({PersistenceConfig.class, ApisConfig.class})
 public class ServerConfig {
 
     @Autowired
     private IUserDao userDao;
+
     @Autowired
     private IEncryptApi encryptApi;
+
     @Autowired
     private IMarkerDao markerDao;
+
     @Autowired
     private IPasswordDao passwordDao;
 
