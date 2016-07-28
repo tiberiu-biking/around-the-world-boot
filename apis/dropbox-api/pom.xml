@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>around-the-world-boot</artifactId>
+        <artifactId>apis</artifactId>
         <groupId>com.tpo.world</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dropbox</artifactId>
+    <artifactId>dropbox-api</artifactId>
 
     <dependencies>
 
@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>geo-coding</artifactId>
+            <artifactId>geo-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 

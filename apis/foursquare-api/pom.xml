@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>around-the-world-boot</artifactId>
+        <artifactId>apis</artifactId>
         <groupId>com.tpo.world</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>foursquare</artifactId>
+    <artifactId>foursquare-api</artifactId>
 
     <repositories>
         <repository>
