@@ -2,7 +2,6 @@ package master.pam.server.impl.response.impl.user;
 
 import com.master.pam.encrypt.api.IEncryptApi;
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
@@ -19,12 +18,14 @@ public class SignInResponse extends AbstractResponse {
 
     private IUserDto user;
 
-    private IUserDao userDao = SpringContext.getBean(IUserDao.class);
+    private IUserDao userDao;
 
-    private IEncryptApi encryptApi = SpringContext.getBean(IEncryptApi.class);
+    private IEncryptApi encryptApi;
 
-    public SignInResponse(IServerRequest aRequest) {
+    public SignInResponse(IServerRequest aRequest, IUserDao userDao, IEncryptApi encryptApi) {
         super(aRequest);
+        this.userDao = userDao;
+        this.encryptApi = encryptApi;
     }
 
     @Override

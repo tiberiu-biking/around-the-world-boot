@@ -11,5 +11,14 @@
 
     <artifactId>around-the-world-app</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.tpo.world</groupId>
+            <artifactId>server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.marker;
 
 import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IMarkerDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.response.ResponseConstants;
@@ -11,10 +10,11 @@ import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 
 public class UpdateMarkerResponse extends AbstractResponse {
 
-    private IMarkerDao markerDao = SpringContext.getBean(IMarkerDao.class);
+    private IMarkerDao markerDao;
 
-    public UpdateMarkerResponse(IServerRequest aRequest) {
+    public UpdateMarkerResponse(IServerRequest aRequest, IMarkerDao markerDao) {
         super(aRequest);
+        this.markerDao = markerDao;
     }
 
     @Override

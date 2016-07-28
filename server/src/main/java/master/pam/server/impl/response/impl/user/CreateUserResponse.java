@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.user;
 
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
@@ -12,11 +11,12 @@ import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 
 public class CreateUserResponse extends AbstractResponse {
 
-    private IUserDao userDao = SpringContext.getBean(IUserDao.class);
+    private IUserDao userDao;
     private IUserDto newUser;
 
-    public CreateUserResponse(IServerRequest aRequest) {
+    public CreateUserResponse(IServerRequest aRequest, IUserDao userDao) {
         super(aRequest);
+        this.userDao = userDao;
     }
 
     @Override

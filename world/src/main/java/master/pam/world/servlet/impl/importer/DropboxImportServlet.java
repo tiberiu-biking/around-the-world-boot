@@ -3,10 +3,10 @@ package master.pam.world.servlet.impl.importer;
 import com.dropbox.core.DbxException;
 import com.master.pam.dropbox.api.IDropboxSource;
 import master.pam.crosscutting.gson.GsonHelper;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
+import master.pam.server.api.server.IServer;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +23,12 @@ public class DropboxImportServlet extends AbstractServerRequestServlet {
 
     private static final long serialVersionUID = -7904700628451273567L;
 
-    private IDropboxSource dropboxAPI = SpringContext.getBean(IDropboxSource.class);
+    private IDropboxSource dropboxAPI;
+
+    public DropboxImportServlet(IServer serverIf, IDropboxSource dropboxAPI) {
+        super(serverIf);
+        this.dropboxAPI = dropboxAPI;
+    }
 
     @Override
     protected ServerActionsEnum getServerAction() {

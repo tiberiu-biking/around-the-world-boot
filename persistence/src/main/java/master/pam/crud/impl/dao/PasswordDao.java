@@ -1,6 +1,6 @@
 package master.pam.crud.impl.dao;
 
-import com.master.pam.encrypt.api.util.hash.HashUtil;
+import com.master.pam.encrypt.util.hash.HashUtil;
 import master.pam.crud.api.dao.IPasswordDao;
 import master.pam.crud.impl.dao.base.BaseDao;
 import master.pam.crud.impl.entity.business.PasswordEntity;

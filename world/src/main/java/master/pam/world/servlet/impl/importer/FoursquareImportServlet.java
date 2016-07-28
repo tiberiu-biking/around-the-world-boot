@@ -3,13 +3,13 @@ package master.pam.world.servlet.impl.importer;
 import fi.foyt.foursquare.api.FoursquareApiException;
 import master.pam.crosscutting.dto.api.IMarkerDto;
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.foursquare.api.impl.IFoursquareSource;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
 import master.pam.server.api.response.ResponseType;
+import master.pam.server.api.server.IServer;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 
@@ -21,7 +21,12 @@ public class FoursquareImportServlet extends AbstractServerRequestServlet {
 
     private static final long serialVersionUID = -7904700628455673567L;
 
-    private IFoursquareSource foursquareAPI = SpringContext.getBean(IFoursquareSource.class);
+    private IFoursquareSource foursquareAPI;
+
+    public FoursquareImportServlet(IServer serverIf, IFoursquareSource foursquareAPI) {
+        super(serverIf);
+        this.foursquareAPI = foursquareAPI;
+    }
 
     @Override
     protected ServerActionsEnum getServerAction() {

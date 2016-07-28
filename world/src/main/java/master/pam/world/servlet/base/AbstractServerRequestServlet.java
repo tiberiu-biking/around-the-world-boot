@@ -1,7 +1,6 @@
 package master.pam.world.servlet.base;
 
 import master.pam.crosscutting.gson.GsonHelper;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.server.IServer;
@@ -40,10 +39,13 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
 
     private IServer serverIf;
 
+    public AbstractServerRequestServlet(IServer serverIf) {
+        this.serverIf = serverIf;
+    }
+
     @Override
     public void init() throws ServletException {
         super.init();
-        serverIf = SpringContext.getBean(IServer.class);
     }
 
     @Override

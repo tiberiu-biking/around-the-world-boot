@@ -10,6 +10,7 @@ import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
+import master.pam.server.api.server.IServer;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import master.pam.world.servlet.exception.WrongRequestException;
@@ -20,6 +21,10 @@ import javax.servlet.annotation.WebServlet;
 public class FoursquarePushServlet extends AbstractServerRequestServlet {
 
     private static final long serialVersionUID = 4052291386604876551L;
+
+    public FoursquarePushServlet(IServer serverIf) {
+        super(serverIf);
+    }
 
     @Override
     protected ServerActionsEnum getServerAction() {

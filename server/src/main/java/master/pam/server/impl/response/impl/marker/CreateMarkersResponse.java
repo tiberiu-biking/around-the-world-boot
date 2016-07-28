@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.marker;
 
 import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IMarkerDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
@@ -17,12 +16,13 @@ import java.util.List;
 
 public class CreateMarkersResponse extends AbstractResponse {
 
-    private IMarkerDao markerDao = SpringContext.getBean(IMarkerDao.class);
+    private IMarkerDao markerDao;
     private List<IMarkerDto> markersList;
     private int newMarkers;
 
-    public CreateMarkersResponse(IServerRequest aRequest) {
+    public CreateMarkersResponse(IServerRequest aRequest, IMarkerDao markerDao) {
         super(aRequest);
+        this.markerDao = markerDao;
     }
 
     @Override
@@ -57,6 +57,5 @@ public class CreateMarkersResponse extends AbstractResponse {
         aResponseEnvelope.addData(ResponseConstants.MARKERS, markersList).addData(ResponseConstants.CENTER_POINT,
                 ServerUtil.calculateCenterPoint(markersList))
                 .addDataMessage(newMarkers + " new marker(s) added.");
-        ;
     }
 }

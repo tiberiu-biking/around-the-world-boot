@@ -10,11 +10,7 @@
 
     <modules>
         <module>domain</module>
-        <module>geo-api</module>
-        <module>encryption</module>
-        <module>dropbox</module>
-        <module>jaxb</module>
-        <module>foursquare</module>
+        <module>apis</module>
         <module>persistence</module>
         <module>server</module>
         <module>world</module>

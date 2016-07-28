@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.user;
 
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
@@ -14,11 +13,10 @@ import org.slf4j.LoggerFactory;
 
 public class GetUserByFoursquareIdResponse extends AbstractResponse {
 
-    private final Logger logger = LoggerFactory.getLogger(GetUserByFoursquareIdResponse.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetUserByFoursquareIdResponse.class);
 
     private IUserDto user;
-
-    private IUserDao userDao = SpringContext.getBean(IUserDao.class);
+    private IUserDao userDao;
 
     public GetUserByFoursquareIdResponse(IServerRequest aRequest) {
         super(aRequest);

@@ -3,6 +3,7 @@ package master.pam.world.servlet.impl.marker;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
+import master.pam.server.api.server.IServer;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 public class GetMarkersServlet extends AbstractServerRequestServlet {
 
     private static final long serialVersionUID = 1606559514981505001L;
+
+    public GetMarkersServlet(IServer serverIf) {
+        super(serverIf);
+    }
 
     @Override
     protected ServerActionsEnum getServerAction() {

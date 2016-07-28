@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.user;
 
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IPasswordDao;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.server.api.request.IServerRequest;
@@ -16,13 +15,15 @@ import java.lang.reflect.InvocationTargetException;
 
 public class UpdateUserResponse extends AbstractResponse {
 
-    private IUserDao userDao = SpringContext.getBean(IUserDao.class);
-    private IPasswordDao passwordDao = SpringContext.getBean(IPasswordDao.class);
+    private IUserDao userDao;
+    private IPasswordDao passwordDao;
 
     private IUserDto updatedUser;
 
-    public UpdateUserResponse(IServerRequest aRequest) {
+    public UpdateUserResponse(IServerRequest aRequest, IUserDao userDao, IPasswordDao passwordDao) {
         super(aRequest);
+        this.userDao = userDao;
+        this.passwordDao = passwordDao;
     }
 
     @Override

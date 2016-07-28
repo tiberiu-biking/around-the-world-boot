@@ -1,7 +1,6 @@
 package master.pam.crud.impl.dao;
 
 import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IPasswordDao;
 import master.pam.crud.api.dao.IUserDao;
 import master.pam.crud.impl.dao.base.BaseDao;
@@ -20,7 +19,11 @@ public class UserDao extends BaseDao implements IUserDao {
 
     private final static Logger logger = LoggerFactory.getLogger(UserDao.class);
 
-    private IPasswordDao passwordDao = SpringContext.getBean(IPasswordDao.class);
+    private IPasswordDao passwordDao;
+
+    public UserDao(IPasswordDao passwordDao) {
+        this.passwordDao = passwordDao;
+    }
 
     @Override
     public IUserDto getUser(String aEmail, String aPassword) {

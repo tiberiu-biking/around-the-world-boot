@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ServerRequest implements IServerRequest {
 
-    private final Logger logger = LoggerFactory.getLogger(ServerRequest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServerRequest.class);
 
     private ServerActionsEnum action;
 

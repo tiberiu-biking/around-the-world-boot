@@ -1,7 +1,6 @@
 package master.pam.server.impl.response.impl.marker;
 
 import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.crud.api.dao.IMarkerDao;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
@@ -17,13 +16,14 @@ import java.util.List;
 
 public class GetMarkersResponse extends AbstractResponse {
 
-    private final Logger logger = LoggerFactory.getLogger(GetMarkersResponse.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetMarkersResponse.class);
     private List<IMarkerDto> markers;
 
-    private IMarkerDao markerDao = SpringContext.getBean(IMarkerDao.class);
+    private IMarkerDao markerDao;
 
-    public GetMarkersResponse(IServerRequest aRequest) {
+    public GetMarkersResponse(IServerRequest aRequest, IMarkerDao markerDao) {
         super(aRequest);
+        this.markerDao = markerDao;
     }
 
     @Override

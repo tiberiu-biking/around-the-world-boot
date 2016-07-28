@@ -7,10 +7,10 @@ import com.master.pam.geo.tagging.PictureTags;
 import master.pam.crosscutting.dto.api.IAddressDto;
 import master.pam.crosscutting.dto.impl.MarkerDto;
 import master.pam.crosscutting.geo.GeoPoint;
-import master.pam.crosscutting.spring.SpringContext;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
+import master.pam.server.api.server.IServer;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 
@@ -32,7 +32,12 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
 
     private boolean isGPSMissing;
 
-    private IGeoCodingAPI geoCodingAPI = SpringContext.getBean(IGeoCodingAPI.class);
+    private IGeoCodingAPI geoCodingAPI;
+
+    public UploadPictureServlet(IServer serverIf, IGeoCodingAPI geoCodingAPI) {
+        super(serverIf);
+        this.geoCodingAPI = geoCodingAPI;
+    }
 
     @Override
     protected ServerActionsEnum getServerAction() {
