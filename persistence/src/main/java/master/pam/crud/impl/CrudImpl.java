@@ -2,73 +2,58 @@ package master.pam.crud.impl;
 
 import master.pam.crosscutting.dto.base.IIdDto;
 import master.pam.crud.impl.entity.base.IdEntity;
-import master.pam.crud.impl.entity.manager.JpaEntityManager;
 import master.pam.crud.impl.iface.ICrud;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
+@Transactional
 public class CrudImpl implements ICrud {
 
-    private static CrudImpl instance;
-    private EntityManager em;
     private final Logger log = LoggerFactory.getLogger(CrudImpl.class);
 
-    public static final ICrud getInstance() {
-        if (instance == null)
-            instance = new CrudImpl();
-        return instance;
-    }
+    private EntityManager entityManager;
 
-    private CrudImpl() {
-    }
-
-    @Override
-    public void startup() {
-        em = JpaEntityManager.getEntityManager();
-    }
-
-    @Override
-    public void shutdown() {
-        em.close();
+    public CrudImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+        entityManager.setFlushMode(FlushModeType.COMMIT);
     }
 
     @Override
     public <T extends IIdDto> List<T> select(Class<T> aClass) {
-        TypedQuery<T> query = JpaEntityManager.createQuery("SELECT c FROM " + aClass.getName() + " c", aClass);
+        TypedQuery<T> query = entityManager.createQuery("SELECT c FROM " + aClass.getName() + " c", aClass);
 
         return query.getResultList();
     }
 
     @Override
     public <T extends IIdDto> T find(Class<T> aClass, long aId) {
-        return JpaEntityManager.find(aClass, aId);
+        return entityManager.find(aClass, aId);
     }
 
     @Override
     public void insert(IdEntity aEntity) {
-        em.getTransaction().begin();
-        JpaEntityManager.persist(aEntity);
-        JpaEntityManager.flush();
-        em.getTransaction().commit();
+        entityManager.persist(aEntity);
+        entityManager.flush();
     }
 
     @Override
     public void update(IdEntity aEntity) {
-        em.getTransaction().begin();
-        em.merge(aEntity);
-        JpaEntityManager.flush();
-        em.getTransaction().commit();
+        entityManager.merge(aEntity);
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public <T extends IIdDto> List<T> selectByNamedQuery(Class<T> aClass, String aNamedQuery, Map<String, Object> aFilter) {
-        TypedQuery<T> query = em.createNamedQuery(aNamedQuery, aClass);
+        TypedQuery<T> query = entityManager.createNamedQuery(aNamedQuery, aClass);
         setQueryParameters(query, aFilter);
         return query.getResultList();
     }
@@ -91,7 +76,7 @@ public class CrudImpl implements ICrud {
         for (String key : aFilter.keySet())
             sqlBuilder.append(" AND ").append(key).append(" = :").append(key);
 
-        TypedQuery<T> query = em.createQuery(sqlBuilder.toString(), aClass);
+        TypedQuery<T> query = entityManager.createQuery(sqlBuilder.toString(), aClass);
         setQueryParameters(query, aFilter);
 
         log.trace("Statement = " + sqlBuilder.toString());
@@ -107,26 +92,22 @@ public class CrudImpl implements ICrud {
     }
 
     private <T extends IIdDto> TypedQuery<T> buildQuery(Class<T> aClass, String aQuery, Map<String, Object> aFilter) {
-        TypedQuery<T> query = em.createQuery(aQuery, aClass);
+        TypedQuery<T> query = entityManager.createQuery(aQuery, aClass);
         setQueryParameters(query, aFilter);
         return query;
     }
 
     @Override
     public void delete(IIdDto aEntity) {
-        em.getTransaction().begin();
-        em.remove(aEntity);
-        em.flush();
-        em.getTransaction().commit();
+        entityManager.remove(aEntity);
+        entityManager.flush();
     }
 
     @Override
     public void delete(Class<? extends IIdDto> aEntityClass, long aId) {
-        em.getTransaction().begin();
-        IIdDto entity = em.find(aEntityClass, aId);
-        em.remove(entity);
-        em.flush();
-        em.getTransaction().commit();
+        IIdDto entity = entityManager.find(aEntityClass, aId);
+        entityManager.remove(entity);
+        entityManager.flush();
     }
 
 }

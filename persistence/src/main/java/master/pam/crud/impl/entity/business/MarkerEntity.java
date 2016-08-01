@@ -3,10 +3,7 @@ package master.pam.crud.impl.entity.business;
 import master.pam.crosscutting.dto.api.IMarkerDto;
 import master.pam.crud.impl.entity.base.IdEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,21 +11,29 @@ import java.util.Date;
 @Table(name = "MARKERS")
 public class MarkerEntity extends IdEntity implements IMarkerDto {
 
+    @Column
     private BigDecimal latitude;
 
+    @Column
     private BigDecimal longitude;
 
+    @Column
     private String name;
 
+    @Column
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
+    @Column
     private String note;
 
+    @Column
     private Long userId;
 
+    @Column
     private String externalId;
 
+    @Column
     private Integer rating;
 
     @Override

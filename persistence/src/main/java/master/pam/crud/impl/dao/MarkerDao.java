@@ -6,16 +6,22 @@ import master.pam.crud.impl.dao.base.BaseDao;
 import master.pam.crud.impl.entity.business.MarkerEntity;
 import master.pam.crud.impl.filter.FilterBuilder;
 import master.pam.crud.impl.filter.FilterBuilderConstants;
+import master.pam.crud.impl.iface.ICrud;
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
 public class MarkerDao extends BaseDao implements IMarkerDao {
 
     private final static Logger logger = LoggerFactory.getLogger(MarkerDao.class);
+
+    public MarkerDao(ICrud crud) {
+        super(crud);
+    }
 
     @Override
     public List<IMarkerDto> getMarkers(Long aUserId, Long aMarkerId) {
@@ -26,16 +32,22 @@ public class MarkerDao extends BaseDao implements IMarkerDao {
         if (aMarkerId != null)
             filter.buildFilter(FilterBuilderConstants.MARKER_ID, aMarkerId).getFilter();
 
-        return getCRUD().select(IMarkerDto.class, filter.getFilter());
+        return crud.select(IMarkerDto.class, filter.getFilter());
     }
 
     @Override
     public IMarkerDto update(IMarkerDto aDto) {
         logger.trace("updateMarker()");
 
-        MarkerEntity entity = getCRUD().find(MarkerEntity.class, aDto.getId());
-        BeanUtils.copyProperties(entity, aDto);
-        getCRUD().update(entity);
+        MarkerEntity entity = crud.find(MarkerEntity.class, aDto.getId());
+        try {
+            BeanUtils.copyProperties(entity, aDto);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        crud.update(entity);
         return entity;
     }
 
@@ -43,7 +55,7 @@ public class MarkerDao extends BaseDao implements IMarkerDao {
     public void delete(long aId) {
         logger.trace("deleteMarker()");
 
-        getCRUD().delete(MarkerEntity.class, aId);
+        crud.delete(MarkerEntity.class, aId);
     }
 
     @Override
@@ -51,8 +63,14 @@ public class MarkerDao extends BaseDao implements IMarkerDao {
         logger.trace("createMarker()");
 
         MarkerEntity entity = new MarkerEntity();
-        BeanUtils.copyProperties(entity, aDto);
-        getCRUD().insert(entity);
+        try {
+            BeanUtils.copyProperties(entity, aDto);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        crud.insert(entity);
         return entity;
     }
 
@@ -63,7 +81,7 @@ public class MarkerDao extends BaseDao implements IMarkerDao {
         Map<String, Object> filter = new FilterBuilder().buildFilter(FilterBuilderConstants.EXTERNAL_ID, aExternalId)
                 .buildFilter(FilterBuilderConstants.USER_ID, aUserId)
                 .getFilter();
-        List<IMarkerDto> resultList = getCRUD().select(IMarkerDto.class, filter);
+        List<IMarkerDto> resultList = crud.select(IMarkerDto.class, filter);
         if (resultList.size() == 0)
             return null;
         return resultList.get(0);

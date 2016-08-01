@@ -7,13 +7,15 @@ import master.pam.crud.impl.dao.base.BaseDao;
 import master.pam.crud.impl.entity.business.UserEntity;
 import master.pam.crud.impl.filter.FilterBuilder;
 import master.pam.crud.impl.filter.FilterBuilderConstants;
+import master.pam.crud.impl.iface.ICrud;
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+
 
 public class UserDao extends BaseDao implements IUserDao {
 
@@ -21,7 +23,8 @@ public class UserDao extends BaseDao implements IUserDao {
 
     private IPasswordDao passwordDao;
 
-    public UserDao(IPasswordDao passwordDao) {
+    public UserDao(ICrud crud, IPasswordDao passwordDao) {
+        super(crud);
         this.passwordDao = passwordDao;
     }
 
@@ -33,7 +36,7 @@ public class UserDao extends BaseDao implements IUserDao {
                 .getFilter();
 
         String query = "SELECT u FROM UserEntity u WHERE UPPER(u.email) = UPPER(:Email)";
-        List<UserEntity> resultList = getCRUD().selectByQuery(UserEntity.class, query, filter);
+        List<UserEntity> resultList = crud.selectByQuery(UserEntity.class, query, filter);
 
         IUserDto result = null;
         if (resultList.size() < 1)
@@ -52,8 +55,14 @@ public class UserDao extends BaseDao implements IUserDao {
     @Override
     public IUserDto insertUser(IUserDto aDto, String aPassword) {
         UserEntity entity = new UserEntity();
-        BeanUtils.copyProperties(entity, aDto);
-        getCRUD().insert(entity);
+        try {
+            BeanUtils.copyProperties(entity, aDto);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        crud.insert(entity);
         passwordDao.insert(aPassword, entity.getId());
         return entity;
     }
@@ -62,11 +71,11 @@ public class UserDao extends BaseDao implements IUserDao {
     public IUserDto update(IUserDto aDto) throws IllegalAccessException, InvocationTargetException {
         logger.trace("updateUser: " + aDto);
 
-        UserEntity entityUser = getCRUD().find(UserEntity.class, aDto.getId());
+        UserEntity entityUser = crud.find(UserEntity.class, aDto.getId());
         logger.debug("Found user with id(" + aDto.getId() + "):  " + entityUser);
 
         BeanUtils.copyProperties(entityUser, aDto);
-        getCRUD().update(entityUser);
+        crud.update(entityUser);
         return entityUser;
     }
 
@@ -77,7 +86,7 @@ public class UserDao extends BaseDao implements IUserDao {
         Map<String, Object> filter = new FilterBuilder().buildFilter(FilterBuilderConstants.ID, aUserId).getFilter();
 
         String query = "SELECT u FROM UserEntity u WHERE u.id = :Id";
-        return getCRUD().selectSingleByQuery(UserEntity.class, query, filter);
+        return crud.selectSingleByQuery(UserEntity.class, query, filter);
     }
 
     @Override
@@ -86,7 +95,7 @@ public class UserDao extends BaseDao implements IUserDao {
         Map<String, Object> filter = new FilterBuilder().buildFilter(FilterBuilderConstants.EMAIL, aEmail).getFilter();
 
         String query = "SELECT u FROM UserEntity u WHERE UPPER(u.email) = UPPER(:Email)";
-        List<UserEntity> resultList = getCRUD().selectByQuery(UserEntity.class, query, filter);
+        List<UserEntity> resultList = crud.selectByQuery(UserEntity.class, query, filter);
 
         if (resultList.size() < 1) {
             logger.trace("User not found!");
@@ -101,7 +110,7 @@ public class UserDao extends BaseDao implements IUserDao {
     public IUserDto getUserByFoursquareId(String aUserFoursquareId) {
         Map<String, Object> filter = new FilterBuilder().buildFilter(FilterBuilderConstants.FOURSQUARE_ID, aUserFoursquareId).getFilter();
 
-        List<UserEntity> resultList = getCRUD().select(UserEntity.class, filter);
+        List<UserEntity> resultList = crud.select(UserEntity.class, filter);
 
         if (resultList.size() < 1) {
             logger.trace("User not found!");

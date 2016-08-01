@@ -8,7 +8,7 @@ public class FilterBuilder {
     private final Map<String, Object> map;
 
     public FilterBuilder() {
-        map = new HashMap<String, Object>();
+        map = new HashMap<>();
     }
 
     public FilterBuilder buildFilter(String aField, Object aFieldValue) {

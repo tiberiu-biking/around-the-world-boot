@@ -8,10 +8,6 @@ import java.util.Map;
 
 public interface ICrud {
 
-    void startup();
-
-    void shutdown();
-
     <T extends IIdDto> List<T> select(Class<T> aClass);
 
     <T extends IIdDto> List<T> select(Class<T> aClass, Map<String, Object> aFilter);

@@ -4,12 +4,13 @@ import master.pam.crosscutting.dto.base.IIdDto;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class IdEntity implements IIdDto {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
