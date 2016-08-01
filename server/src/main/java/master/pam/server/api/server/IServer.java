@@ -8,9 +8,4 @@ public interface IServer {
     IServerRequest createRequest();
 
     IResponseEnvelope sendRequest(IServerRequest serverRequest);
-
-    void startup();
-
-    void shutdown();
-
 }

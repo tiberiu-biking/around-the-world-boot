@@ -1,6 +1,5 @@
 package master.pam.server.impl.server;
 
-import master.pam.crud.impl.CrudImpl;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.server.IServer;
 import master.pam.server.impl.request.RequestFactory;
@@ -30,13 +29,4 @@ public class Server implements IServer {
         return requestFactory.createResult(aServerRequest);
     }
 
-    @Override
-    public void startup() {
-        CrudImpl.getInstance().startup();
-    }
-
-    @Override
-    public void shutdown() {
-        CrudImpl.getInstance().shutdown();
-    }
 }
