@@ -14,6 +14,8 @@ import master.pam.server.api.server.IServer;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import master.pam.world.servlet.exception.WrongRequestException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ import java.io.IOException;
 @Controller
 public class FoursquarePushServlet extends AbstractServerRequestServlet {
 
-    private static final long serialVersionUID = 4052291386604876551L;
+    private static final Logger logger = LoggerFactory.getLogger(FoursquarePushServlet.class);
 
     public FoursquarePushServlet(IServer serverIf) {
         super(serverIf);

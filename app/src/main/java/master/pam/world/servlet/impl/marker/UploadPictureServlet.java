@@ -13,9 +13,16 @@ import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.server.IServer;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -24,11 +31,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Controller
 @MultipartConfig
-@WebServlet(name = "UploadPictureServlet", urlPatterns = "/UploadPictureServlet")
 public class UploadPictureServlet extends AbstractServerRequestServlet {
 
-    private static final long serialVersionUID = -4114394782652326927L;
+    private static final Logger logger = LoggerFactory.getLogger(UploadPictureServlet.class);
 
     private boolean isGPSMissing;
 
@@ -37,6 +44,16 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
     public UploadPictureServlet(IServer serverIf, IGeoCodingAPI geoCodingAPI) {
         super(serverIf);
         this.geoCodingAPI = geoCodingAPI;
+    }
+
+    @RequestMapping(value = "/UploadPictureServlet", method = RequestMethod.GET)
+    public void doGet(HttpServletRequest aRequest, HttpServletResponse aResponse) throws ServletException, IOException {
+        super.doGet(aRequest, aResponse);
+    }
+
+    @RequestMapping(value = "/UploadPictureServlet", method = RequestMethod.POST)
+    public void doPost(HttpServletRequest aRequest, HttpServletResponse aResponse) throws ServletException, IOException {
+        super.doPost(aRequest, aResponse);
     }
 
     @Override
