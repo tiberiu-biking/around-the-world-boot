@@ -48,7 +48,6 @@ public class CrudImpl implements ICrud {
     public void update(IdEntity aEntity) {
         entityManager.merge(aEntity);
         entityManager.flush();
-        entityManager.getTransaction().commit();
     }
 
     @Override
