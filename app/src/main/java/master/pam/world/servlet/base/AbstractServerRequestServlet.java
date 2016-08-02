@@ -23,35 +23,17 @@ import java.util.Collection;
 
 public abstract class AbstractServerRequestServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 5518741746920834843L;
-
-    abstract protected ServerActionsEnum getServerAction();
-
-    abstract protected void buildServerRequest(IServerRequest aServerRequest) throws WrongRequestException;
-
-    protected final Logger logger = LoggerFactory.getLogger(AbstractServerRequestServlet.class);
-
-    protected final String JSON_RESPONSE = "application/json";
-
-    private IServerRequest serverRequest;
-
+    private static final Logger logger = LoggerFactory.getLogger(AbstractServerRequestServlet.class);
     private HttpServletRequest httpRequest;
-
     private IServer serverIf;
 
     public AbstractServerRequestServlet(IServer serverIf) {
         this.serverIf = serverIf;
     }
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
+    abstract protected ServerActionsEnum getServerAction();
 
-    @Override
-    public void destroy() {
-        super.destroy();
-    }
+    abstract protected void buildServerRequest(IServerRequest aServerRequest) throws WrongRequestException;
 
     @Override
     public void doGet(HttpServletRequest aRequest, HttpServletResponse aResponse) throws ServletException, IOException {
@@ -69,10 +51,9 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
     }
 
     protected void doRequest(HttpServletResponse aResponse) throws ServletException, java.io.IOException {
+        logger.info("Server action: " + getServerAction());
 
-        serverRequest = serverIf.createRequest();
-
-        logger.debug("Server action:  " + getServerAction());
+        IServerRequest serverRequest = serverIf.createRequest();
 
         serverRequest.setAction(getServerAction());
 
@@ -86,8 +67,8 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
 
         String resultJson = buildResult(resultObj);
 
-        logger.debug("Sending json to server: " + resultJson);
-        aResponse.setContentType(JSON_RESPONSE);
+        logger.info("Sending json to server: " + resultJson);
+        aResponse.setContentType("application/json");
         aResponse.setCharacterEncoding("utf-8");
         aResponse.setStatus(HttpServletResponse.SC_OK);
 
@@ -106,17 +87,13 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
             // TODO
             e.printStackTrace();
             logger.error("The http request has no parts!", e);
-            return new ArrayList<Part>();
+            return new ArrayList<>();
         }
     }
 
     protected String buildResult(IResponseEnvelope aResponseEnvelope) {
-
         logger.debug("Build result. Server result: " + aResponseEnvelope);
-
-        String gsonString = buildGson(aResponseEnvelope);
-
-        return gsonString;
+        return buildGson(aResponseEnvelope);
     }
 
     protected String buildGson(IResponseEnvelope aResponseEnvelope) {
