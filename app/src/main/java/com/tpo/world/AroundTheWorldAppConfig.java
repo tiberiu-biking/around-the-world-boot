@@ -15,9 +15,4 @@ import org.springframework.context.annotation.Import;
 @Import(ServerConfig.class)
 @ComponentScan(basePackages = "master.pam.world.servlet.impl")
 public class AroundTheWorldAppConfig {
-
-//    @Bean
-//    public SignupServlet signupServlet(IServer server){
-//        return new SignupServlet(server);
-//    }
 }
