@@ -1,8 +1,8 @@
 package master.pam.world.servlet.impl.importer;
 
+import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.domain.entity.UserEntity;
 import fi.foyt.foursquare.api.FoursquareApiException;
-import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crosscutting.dto.api.IUserDto;
 import master.pam.foursquare.api.impl.IFoursquareSource;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
@@ -55,7 +55,7 @@ public class FoursquareImportServlet extends AbstractServerRequestServlet {
         String token = getHttpParam(RequestConstants.CODE);
 
         IResponseEnvelope requestUserResponse = getServer().sendRequest(builGetUserInfoRequest());
-        IUserDto userDto = requestUserResponse.getData(ResponseConstants.USER, IUserDto.class);
+        UserEntity userDto = requestUserResponse.getData(ResponseConstants.USER, UserEntity.class);
 
         if (userDto.getFoursquareToken() == null) {
             userDto.setFoursquareToken(token);
@@ -72,7 +72,7 @@ public class FoursquareImportServlet extends AbstractServerRequestServlet {
         try {
             Long userId = Long.parseLong(getHttpParam(RequestConstants.USER_ID));
 
-            List<IMarkerDto> foursquareMarkers = foursquareAPI.getMarkers(token, userId);
+            List<MarkerEntity> foursquareMarkers = foursquareAPI.getMarkers(token, userId);
 
             aServerRequest.addField(RequestConstants.DTO_LIST, foursquareMarkers);
 
@@ -91,10 +91,10 @@ public class FoursquareImportServlet extends AbstractServerRequestServlet {
         return codeRequest;
     }
 
-    private IServerRequest builSaveUserInfoRequest(IUserDto aUserDto) {
+    private IServerRequest builSaveUserInfoRequest(UserEntity user) {
         IServerRequest codeRequest = getServer().createRequest();
         codeRequest.setAction(ServerActionsEnum.UPDATE_USER);
-        codeRequest.addField(RequestConstants.DTO, aUserDto);
+        codeRequest.addField(RequestConstants.DTO, user);
         return codeRequest;
     }
 

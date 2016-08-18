@@ -1,25 +1,31 @@
 package master.pam.server.impl.response.impl.marker;
 
-import master.pam.crud.api.dao.IMarkerDao;
+import com.tpo.world.persistence.repository.MarkerRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
 import master.pam.server.impl.exceptions.RequestException;
 import master.pam.server.impl.response.base.AbstractResponse;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DeleteMarkersResponse extends AbstractResponse {
 
-    private IMarkerDao markerDao;
+    private final static Logger logger = LoggerFactory.getLogger(DeleteMarkersResponse.class);
 
-    public DeleteMarkersResponse(IServerRequest aRequest, IMarkerDao markerDao) {
+    private MarkerRepository markerRepository;
+
+    public DeleteMarkersResponse(IServerRequest aRequest, MarkerRepository markerRepository) {
         super(aRequest);
-        this.markerDao = markerDao;
+        this.markerRepository = markerRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
-        markerDao.delete(getRequest().getLong(RequestConstants.MARKER_ID));
+        Long markerId = getRequest().getLong(RequestConstants.MARKER_ID);
+        logger.info("Deleting marker with id '{}'", markerId);
+        markerRepository.delete(markerId);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package master.pam.world.servlet.impl.push;
 
+import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.domain.entity.UserEntity;
 import fi.foyt.foursquare.api.entities.Checkin;
-import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crosscutting.dto.api.IUserDto;
 import master.pam.crosscutting.gson.GsonHelper;
 import master.pam.crosscutting.notifications.NotificationPool;
 import master.pam.foursquare.api.util.FoursquareUtil;
@@ -59,11 +59,11 @@ public class FoursquarePushServlet extends AbstractServerRequestServlet {
 
         IServerRequest userRequest = builGetUserInfoRequest(checkin.getUser().getId());
         IResponseEnvelope requestUserResponse = getServer().sendRequest(userRequest);
-        IUserDto userDto = requestUserResponse.getData(ResponseConstants.USER, IUserDto.class);
+        UserEntity user = requestUserResponse.getData(ResponseConstants.USER, UserEntity.class);
 
-        if (userDto != null) {
-            IMarkerDto markerDto = FoursquareUtil.checkinToMarker(checkin, userDto.getId());
-            aServerRequest.addField(RequestConstants.DTO, markerDto);
+        if (user != null) {
+            MarkerEntity marker = FoursquareUtil.checkinToMarker(checkin, user.getId());
+            aServerRequest.addField(RequestConstants.DTO, marker);
         }
     }
 

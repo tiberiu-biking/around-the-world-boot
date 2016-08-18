@@ -1,7 +1,7 @@
 package master.pam.server.impl.response.impl.user;
 
-import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crud.api.dao.IUserDao;
+import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -15,21 +15,21 @@ public class GetUserResponse extends AbstractResponse {
 
     private static final Logger logger = LoggerFactory.getLogger(GetUserResponse.class);
 
-    private IUserDto user;
-    private IUserDao userDao;
+    private final UserRepository userRepository;
+    private UserEntity user;
 
-    public GetUserResponse(IServerRequest aRequest, IUserDao userDao) {
+    public GetUserResponse(IServerRequest aRequest, UserRepository userRepository) {
         super(aRequest);
-        this.userDao = userDao;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
         long userId = getRequest().getLong(RequestConstants.USER_ID);
-        logger.debug("Get infor for user: " + userId);
+        logger.info("Get info for user: " + userId);
 
-        user = userDao.getUser(userId);
-        logger.debug("User found: " + user);
+        user = userRepository.getOne(userId);
+        logger.info("User found: " + user);
     }
 
     @Override

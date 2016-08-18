@@ -4,7 +4,6 @@ import com.google.code.geocoder.AdvancedGeoCoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.*;
 import com.master.pam.geo.coding.api.IGeoCodingAPI;
-import master.pam.crosscutting.dto.api.IAddressDto;
 import master.pam.crosscutting.dto.impl.AddressDto;
 import master.pam.crosscutting.geo.GeoPoint;
 
@@ -13,11 +12,11 @@ import java.util.List;
 
 public class GeoCodingAPI implements IGeoCodingAPI {
 
-    public IAddressDto getAddress(BigDecimal aLatitude, BigDecimal aLongitude) {
+    public AddressDto getAddress(BigDecimal aLatitude, BigDecimal aLongitude) {
         return getAddress(new GeoPoint(aLatitude, aLongitude));
     }
 
-    public IAddressDto getAddress(GeoPoint aGeoPoint) {
+    public AddressDto getAddress(GeoPoint aGeoPoint) {
 
         final AdvancedGeoCoder geocoder = new AdvancedGeoCoder();
 

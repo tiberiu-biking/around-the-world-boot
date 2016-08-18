@@ -1,7 +1,7 @@
 package master.pam.server.impl.response.impl.marker;
 
-import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crud.api.dao.IMarkerDao;
+import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.repository.MarkerRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -17,29 +17,33 @@ import java.util.List;
 public class GetMarkersResponse extends AbstractResponse {
 
     private static final Logger logger = LoggerFactory.getLogger(GetMarkersResponse.class);
-    private List<IMarkerDto> markers;
+    private List<MarkerEntity> markers;
 
-    private IMarkerDao markerDao;
+    private MarkerRepository markerRepository;
 
-    public GetMarkersResponse(IServerRequest aRequest, IMarkerDao markerDao) {
+    public GetMarkersResponse(IServerRequest aRequest, MarkerRepository markerRepository) {
         super(aRequest);
-        this.markerDao = markerDao;
+        this.markerRepository = markerRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
-
         Long userId = getRequest().getLong(RequestConstants.USER_ID);
         Long markerId = getRequest().getLong(RequestConstants.MARKER_ID);
 
-        logger.debug("get markers for user = " + userId + ", marker = " + markerId);
+        logger.info("Getting markers for user '{}' and marker {}", userId, markerId);
 
-        markers = markerDao.getMarkers(userId, markerId);
+        if (markerId != null) {
+            markers = markerRepository.findByIdAndUserId(markerId, userId);
+        } else {
+            markers = markerRepository.findByUserId(userId);
+        }
     }
 
     @Override
     public void buildResponseEnvelope(IResponseEnvelope aEnvelope) {
-        aEnvelope.addData(ResponseConstants.MARKERS, markers).addData(ResponseConstants.CENTER_POINT,
-                ServerUtil.calculateCenterPoint(markers));
+        aEnvelope
+                .addData(ResponseConstants.MARKERS, markers)
+                .addData(ResponseConstants.CENTER_POINT, ServerUtil.calculateCenterPoint(markers));
     }
 }

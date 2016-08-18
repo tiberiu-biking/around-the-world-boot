@@ -1,6 +1,6 @@
 package master.pam.world.servlet.impl.user;
 
-import master.pam.crosscutting.dto.impl.UserDto;
+import com.tpo.world.domain.entity.UserEntity;
 import master.pam.crosscutting.gson.GsonHelper;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
@@ -40,7 +40,7 @@ public class UpdateUserServlet extends AbstractServerRequestServlet {
 
     @Override
     protected void buildServerRequest(IServerRequest aServerRequest) {
-        UserDto userDto = GsonHelper.fromGson(getHttpParam(RequestConstants.USER), UserDto.class);
+        UserEntity userDto = GsonHelper.fromGson(getHttpParam(RequestConstants.USER), UserEntity.class);
         aServerRequest.addField(RequestConstants.DTO, userDto);
         aServerRequest.addField(RequestConstants.PASSWORD, getHttpParam(RequestConstants.PASSWORD));
     }

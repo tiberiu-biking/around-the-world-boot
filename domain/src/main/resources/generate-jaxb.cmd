@@ -1,1 +1,0 @@
-%JAVA_JDK%\xjc.exe -d ../java -p com.master.pam.jaxb.generated import.xsd

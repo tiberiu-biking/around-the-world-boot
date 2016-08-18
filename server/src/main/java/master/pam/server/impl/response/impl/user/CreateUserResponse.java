@@ -1,7 +1,10 @@
 package master.pam.server.impl.response.impl.user;
 
-import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crud.api.dao.IUserDao;
+import com.master.pam.encrypt.util.hash.HashUtil;
+import com.tpo.world.domain.entity.PasswordEntity;
+import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.persistence.repository.PasswordRepository;
+import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -11,28 +14,38 @@ import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 
 public class CreateUserResponse extends AbstractResponse {
 
-    private IUserDao userDao;
-    private IUserDto newUser;
+    private UserEntity newUser;
+    private UserRepository userRepository;
+    private PasswordRepository passwordRepository;
 
-    public CreateUserResponse(IServerRequest aRequest, IUserDao userDao) {
+    public CreateUserResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository) {
         super(aRequest);
-        this.userDao = userDao;
+        this.userRepository = userRepository;
+        this.passwordRepository = passwordRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
-        IUserDto userDto = getRequest().getDto(IUserDto.class);
-        IUserDto existingUser = userDao.getUser(userDto.getEmail());
-        if (existingUser == null)
-            newUser = userDao.insertUser(userDto, getRequest().getString(RequestConstants.PASSWORD));
+        UserEntity user = getRequest().getDto(UserEntity.class);
+        UserEntity existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
+        if (existingUser == null) {
+            newUser = userRepository.saveAndFlush(user);
+
+            String password = getRequest().getString(RequestConstants.PASSWORD);
+            PasswordEntity passwordEntity = new PasswordEntity();
+            passwordEntity.setUserId(newUser.getId());
+            passwordEntity.setPassword(HashUtil.getHash(password));
+            passwordRepository.saveAndFlush(passwordEntity);
+        }
     }
 
     @Override
     public void buildResponseEnvelope(IResponseEnvelope aResponseEnvelope) {
-        if (newUser != null)
+        if (newUser != null) {
             aResponseEnvelope.addData(ResponseConstants.USER_ID, newUser.getId());
-        else
+        } else {
             aResponseEnvelope.setErrors("Someone already has registered with this email");
+        }
 
     }
 

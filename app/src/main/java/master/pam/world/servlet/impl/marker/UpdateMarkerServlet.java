@@ -1,6 +1,6 @@
 package master.pam.world.servlet.impl.marker;
 
-import master.pam.crosscutting.dto.impl.MarkerDto;
+import com.tpo.world.domain.entity.MarkerEntity;
 import master.pam.crosscutting.gson.GsonHelper;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
@@ -41,7 +41,7 @@ public class UpdateMarkerServlet extends AbstractServerRequestServlet {
 
     @Override
     protected void buildServerRequest(IServerRequest aServerRequest) {
-        aServerRequest.addField(RequestConstants.DTO, GsonHelper.fromGson(getHttpParam(RequestConstants.MARKER), MarkerDto.class));
+        aServerRequest.addField(RequestConstants.DTO, GsonHelper.fromGson(getHttpParam(RequestConstants.MARKER), MarkerEntity.class));
     }
 
 }

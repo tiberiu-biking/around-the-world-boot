@@ -16,17 +16,17 @@ public class DateFormatUtil {
 
     private final static Logger logger = LoggerFactory.getLogger(DateFormatUtil.class);
 
-    public static final String formatDate(Date aDate) {
+    public static String formatDate(Date aDate) {
         return DateFormatUtils.format(aDate, DATE_PATTERN_MASTER_PAM);
     }
 
-    public static final Integer getYear(Date aDate) {
+    public static Integer getYear(Date aDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(aDate);
         return cal.get(Calendar.YEAR);
     }
 
-    public static final Date parseDropboxDate(String aDropboxDate) {
+    public static Date parseDropboxDate(String aDropboxDate) {
         SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
         try {
             return df.parse(aDropboxDate);

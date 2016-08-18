@@ -1,7 +1,7 @@
 package master.pam.world.servlet.impl.importer;
 
 import com.dropbox.core.DbxException;
-import com.master.pam.dropbox.api.IDropboxSource;
+import com.tpo.world.api.dropbox.api.IDropboxSource;
 import master.pam.crosscutting.gson.GsonHelper;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
@@ -50,7 +50,7 @@ public class DropboxImportServlet extends AbstractServerRequestServlet {
         String code = getHttpParam(RequestConstants.CODE);
         String[] files = GsonHelper.fromGson(getHttpParam(RequestConstants.FILES), String[].class);
 
-        List<String> paths = new ArrayList<String>();
+        List<String> paths = new ArrayList<>();
 
         for (String file : files) {
             String[] splited = StringUtils.split(file, "/");

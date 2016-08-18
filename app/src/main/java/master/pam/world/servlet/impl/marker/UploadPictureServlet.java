@@ -4,8 +4,8 @@ import com.drew.imaging.ImageProcessingException;
 import com.master.pam.geo.coding.api.IGeoCodingAPI;
 import com.master.pam.geo.tagging.PictureTaggingUtil;
 import com.master.pam.geo.tagging.PictureTags;
-import master.pam.crosscutting.dto.api.IAddressDto;
-import master.pam.crosscutting.dto.impl.MarkerDto;
+import com.tpo.world.domain.entity.MarkerEntity;
+import master.pam.crosscutting.dto.impl.IAddressDto;
 import master.pam.crosscutting.geo.GeoPoint;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
@@ -65,7 +65,7 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
     protected void buildServerRequest(IServerRequest aServerRequest) {
         Collection<Part> parts = getHttpRequestParts();
         isGPSMissing = false;
-        List<MarkerDto> markers = new ArrayList<MarkerDto>();
+        List<MarkerEntity> markers = new ArrayList<>();
 
         for (Part part : parts) {
             if (part.getContentType() != null) {
@@ -79,21 +79,18 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
                         return;
                     }
                     GeoPoint location = pictureTags.getLocation();
-                    MarkerDto markerDto = new MarkerDto(location.getLatitude(), location.getLongitude());
-                    markerDto.setDate(pictureTags.getDateTaken());
+                    MarkerEntity markerEntity = new MarkerEntity();
+                    markerEntity.setLatitude(location.getLatitude());
+                    markerEntity.setLongitude(location.getLongitude());
+                    markerEntity.setDate(pictureTags.getDateTaken());
 
-                    markerDto.setUserId(Long.parseLong(getHttpParam(RequestConstants.USER_ID)));
-/*          if ( part instanceof ApplicationPart ) {
-            ApplicationPart appPart = ( ApplicationPart ) part;
-            markerDto.setNote( "Imported from picture: " + StringUtils.upperCase( (appPart).getFilename() ) );
-          } else {*/
-                    markerDto.setNote("Imported from a picture ");
-/*          }*/
+                    markerEntity.setUserId(Long.parseLong(getHttpParam(RequestConstants.USER_ID)));
+                    markerEntity.setNote("Imported from a picture ");
 
                     // geo coding
-                    IAddressDto address = geoCodingAPI.getAddress(markerDto.getLatitude(), markerDto.getLongitude());
-                    markerDto.setName(address.getShortAddress());
-                    markers.add(markerDto);
+                    IAddressDto address = geoCodingAPI.getAddress(markerEntity.getLatitude(), markerEntity.getLongitude());
+                    markerEntity.setName(address.getShortAddress());
+                    markers.add(markerEntity);
 
                 } catch (IOException | ImageProcessingException e) {
                     logger.error("FileUploadServlet: cannot get location from picture!", e);

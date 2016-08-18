@@ -1,8 +1,10 @@
 package master.pam.server.impl.response.impl.user;
 
 import com.master.pam.encrypt.api.IEncryptApi;
-import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crud.api.dao.IUserDao;
+import com.tpo.world.domain.entity.PasswordEntity;
+import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.persistence.repository.PasswordRepository;
+import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -14,17 +16,17 @@ import org.slf4j.LoggerFactory;
 
 public class SignInResponse extends AbstractResponse {
 
-    private final Logger log = LoggerFactory.getLogger(SignInResponse.class);
+    private final Logger logger = LoggerFactory.getLogger(SignInResponse.class);
 
-    private IUserDto user;
-
-    private IUserDao userDao;
-
+    private UserRepository userRepository;
+    private UserEntity userEntity;
+    private PasswordRepository passwordRepository;
     private IEncryptApi encryptApi;
 
-    public SignInResponse(IServerRequest aRequest, IUserDao userDao, IEncryptApi encryptApi) {
+    public SignInResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, IEncryptApi encryptApi) {
         super(aRequest);
-        this.userDao = userDao;
+        this.userRepository = userRepository;
+        this.passwordRepository = passwordRepository;
         this.encryptApi = encryptApi;
     }
 
@@ -32,24 +34,35 @@ public class SignInResponse extends AbstractResponse {
     public void doRequest() throws RequestException {
         String username = getRequest().getString(RequestConstants.USERNAME);
         String password = getRequest().getString(RequestConstants.PASSWORD);
-        String hashedPass = encryptApi.hash(password);
+        String hashedPassword = encryptApi.hash(password);
 
-        log.debug("Try to login user: " + username + "/" + password + "/" + hashedPass);
+        logger.info("Try to login user: " + username + "/" + password + "/" + hashedPassword);
 
-        user = userDao.getUser(username, hashedPass);
+        userEntity = userRepository.findByEmailIgnoreCase(username);
 
-        log.debug("User found: " + user);
+        if (userEntity != null) {
+            logger.info("User incorrect!");
+        } else {
+            logger.info("User found");
+            PasswordEntity passwordEntity = passwordRepository.findByUserId(userEntity.getId());
+
+            if (!hashedPassword.equals(passwordEntity.getPassword())) {
+                userEntity = null;
+                logger.trace("Password incorrect!");
+            }
+        }
+        logger.info("User found: " + userEntity);
     }
 
     @Override
     public void buildResponseEnvelope(IResponseEnvelope aEnvelope) {
-        if (user == null)
+        if (userEntity == null) {
             aEnvelope.setErrors("User/password incorrect!");
-        else {
-            aEnvelope.addData(ResponseConstants.USER_ID, user.getId());
-            aEnvelope.addData(ResponseConstants.FIRST_NAME, user.getFirstName());
-            aEnvelope.addData(ResponseConstants.DROPBOX_TOKEN, user.getDropboxToken());
-            aEnvelope.addData(ResponseConstants.FOURSQUARE_TOKEN, user.getFoursquareToken());
+        } else {
+            aEnvelope.addData(ResponseConstants.USER_ID, userEntity.getId());
+            aEnvelope.addData(ResponseConstants.FIRST_NAME, userEntity.getFirstName());
+            aEnvelope.addData(ResponseConstants.DROPBOX_TOKEN, userEntity.getDropboxToken());
+            aEnvelope.addData(ResponseConstants.FOURSQUARE_TOKEN, userEntity.getFoursquareToken());
         }
     }
 

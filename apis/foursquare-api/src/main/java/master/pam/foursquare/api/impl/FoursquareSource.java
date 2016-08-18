@@ -1,12 +1,12 @@
 package master.pam.foursquare.api.impl;
 
+import com.tpo.world.domain.entity.MarkerEntity;
 import fi.foyt.foursquare.api.FoursquareApi;
 import fi.foyt.foursquare.api.FoursquareApiException;
 import fi.foyt.foursquare.api.Result;
 import fi.foyt.foursquare.api.entities.Checkin;
 import fi.foyt.foursquare.api.entities.CheckinGroup;
 import fi.foyt.foursquare.api.entities.CompleteUser;
-import master.pam.crosscutting.dto.api.IMarkerDto;
 import master.pam.foursquare.api.constants.FoursquareConstants;
 import master.pam.foursquare.api.util.FoursquareUtil;
 
@@ -18,8 +18,8 @@ public class FoursquareSource implements IFoursquareSource {
     private static FoursquareApi instance;
 
     @Override
-    public List<IMarkerDto> getMarkers(String aCode, long aUserId) throws FoursquareApiException {
-        ArrayList<IMarkerDto> foursquareMarkers = new ArrayList<IMarkerDto>();
+    public List<MarkerEntity> getMarkers(String aCode, long aUserId) throws FoursquareApiException {
+        ArrayList<MarkerEntity> foursquareMarkers = new ArrayList<>();
 
         getAPI().authenticateCode(aCode);
 

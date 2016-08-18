@@ -1,19 +1,19 @@
 package master.pam.server.impl.util;
 
-import master.pam.crosscutting.dto.api.IMarkerDto;
+import com.tpo.world.domain.entity.MarkerEntity;
 import master.pam.crosscutting.geo.GeoPoint;
 
 import java.util.List;
 
 public class ServerUtil {
 
-    public static final GeoPoint calculateCenterPoint(List<IMarkerDto> aMarkers) {
+    public static GeoPoint calculateCenterPoint(List<MarkerEntity> markers) {
         double minLatitude = 9999;
         double maxLatitude = -9999;
         double minLong = 9999;
         double maxLong = -9999;
 
-        for (IMarkerDto marker : aMarkers) {
+        for (MarkerEntity marker : markers) {
             if (marker.getLatitude().doubleValue() > maxLatitude)
                 maxLatitude = marker.getLatitude().doubleValue();
             if (marker.getLatitude().doubleValue() < minLatitude)

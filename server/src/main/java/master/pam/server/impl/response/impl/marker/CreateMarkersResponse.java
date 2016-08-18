@@ -1,7 +1,7 @@
 package master.pam.server.impl.response.impl.marker;
 
-import master.pam.crosscutting.dto.api.IMarkerDto;
-import master.pam.crud.api.dao.IMarkerDao;
+import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.repository.MarkerRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -10,52 +10,58 @@ import master.pam.server.impl.exceptions.RequestException;
 import master.pam.server.impl.response.base.AbstractResponse;
 import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.server.impl.util.ServerUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateMarkersResponse extends AbstractResponse {
 
-    private IMarkerDao markerDao;
-    private List<IMarkerDto> markersList;
+    private final static Logger logger = LoggerFactory.getLogger(CreateMarkersResponse.class);
+
+    private MarkerRepository markerRepository;
+    private List<MarkerEntity> markers;
     private int newMarkers;
 
-    public CreateMarkersResponse(IServerRequest aRequest, IMarkerDao markerDao) {
+    public CreateMarkersResponse(IServerRequest aRequest, MarkerRepository markerRepository) {
         super(aRequest);
-        this.markerDao = markerDao;
+        this.markerRepository = markerRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
 
-        List<IMarkerDto> dtoList = getRequest().getDtoList(IMarkerDto.class);
-        if (dtoList == null) {
-            dtoList = new ArrayList<IMarkerDto>();
-            IMarkerDto dto = getRequest().getDto(IMarkerDto.class);
-            if (dto != null)
-                dtoList.add(dto);
+        List<MarkerEntity> markers = getRequest().getDtoList(MarkerEntity.class);
+        if (markers == null) {
+            markers = new ArrayList<>();
+            MarkerEntity dto = getRequest().getDto(MarkerEntity.class);
+            if (dto != null) {
+                markers.add(dto);
+            }
         }
 
-        markersList = new ArrayList<IMarkerDto>();
+        this.markers = new ArrayList<>();
 
-        for (IMarkerDto dto : dtoList) {
-            IMarkerDto existingDto = markerDao.getByExternalId(dto.getExternalId(), dto.getUserId());
-            if (existingDto == null)
-                markersList.add(markerDao.create(dto));
+        for (MarkerEntity marker : markers) {
+            markerRepository.saveAndFlush(marker);
+            this.markers.add(marker);
         }
 
-        newMarkers = markersList.size();
+        newMarkers = this.markers.size();
 
         ResponseType responseType = getRequest().get(RequestConstants.RETURN_TYPE, ResponseType.class);
         Long userId = getRequest().get(RequestConstants.USER_ID, Long.class);
-        if (responseType == ResponseType.RETURN_ALL)
-            markersList = markerDao.getMarkers(userId, null);
+        if (responseType == ResponseType.RETURN_ALL) {
+            this.markers = markerRepository.findByUserId(userId);
+        }
     }
 
     @Override
     public void buildResponseEnvelope(IResponseEnvelope aResponseEnvelope) {
-        aResponseEnvelope.addData(ResponseConstants.MARKERS, markersList).addData(ResponseConstants.CENTER_POINT,
-                ServerUtil.calculateCenterPoint(markersList))
+        aResponseEnvelope
+                .addData(ResponseConstants.MARKERS, markers)
+                .addData(ResponseConstants.CENTER_POINT, ServerUtil.calculateCenterPoint(markers))
                 .addDataMessage(newMarkers + " new marker(s) added.");
     }
 }

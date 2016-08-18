@@ -1,15 +1,14 @@
 package master.pam.server;
 
 import com.master.pam.encrypt.api.IEncryptApi;
-import master.pam.crud.PersistenceConfig;
-import master.pam.crud.api.dao.IMarkerDao;
-import master.pam.crud.api.dao.IPasswordDao;
-import master.pam.crud.api.dao.IUserDao;
+import com.tpo.world.persistence.PersistenceConfig;
+import com.tpo.world.persistence.repository.MarkerRepository;
+import com.tpo.world.persistence.repository.PasswordRepository;
+import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.server.IServer;
 import master.pam.server.config.ApisConfig;
 import master.pam.server.impl.request.RequestFactory;
 import master.pam.server.impl.server.Server;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,25 +21,13 @@ import org.springframework.context.annotation.Import;
 @Import({PersistenceConfig.class, ApisConfig.class})
 public class ServerConfig {
 
-    @Autowired
-    private IUserDao userDao;
-
-    @Autowired
-    private IEncryptApi encryptApi;
-
-    @Autowired
-    private IMarkerDao markerDao;
-
-    @Autowired
-    private IPasswordDao passwordDao;
-
     @Bean
     public IServer server(RequestFactory requestFactory) {
         return new Server(requestFactory);
     }
 
     @Bean
-    public RequestFactory requestFactory() {
-        return new RequestFactory(userDao, encryptApi, markerDao, passwordDao);
+    public RequestFactory requestFactory(MarkerRepository markerRepository, UserRepository userRepository, PasswordRepository passwordRepository, IEncryptApi encryptApi) {
+        return new RequestFactory(userRepository, passwordRepository, markerRepository, encryptApi);
     }
 }

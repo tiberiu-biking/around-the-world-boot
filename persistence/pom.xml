@@ -14,14 +14,19 @@
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>encryption-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>encryption-api</artifactId>
-            <version>${project.version}</version>
+            <artifactId>domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

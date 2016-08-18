@@ -15,13 +15,11 @@
         <dependency>
             <groupId>com.tpo.world</groupId>
             <artifactId>domain</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.tpo.world</groupId>
             <artifactId>geo-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

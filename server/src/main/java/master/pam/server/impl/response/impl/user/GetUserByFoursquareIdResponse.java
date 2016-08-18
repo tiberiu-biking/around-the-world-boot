@@ -1,7 +1,7 @@
 package master.pam.server.impl.response.impl.user;
 
-import master.pam.crosscutting.dto.api.IUserDto;
-import master.pam.crud.api.dao.IUserDao;
+import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -15,20 +15,20 @@ public class GetUserByFoursquareIdResponse extends AbstractResponse {
 
     private static final Logger logger = LoggerFactory.getLogger(GetUserByFoursquareIdResponse.class);
 
-    private IUserDto user;
-    private IUserDao userDao;
+    private UserEntity user;
+    private UserRepository userRepository;
 
-    public GetUserByFoursquareIdResponse(IServerRequest aRequest) {
+    public GetUserByFoursquareIdResponse(IServerRequest aRequest, UserRepository userRepository) {
         super(aRequest);
+        this.userRepository = userRepository;
     }
 
     @Override
     public void doRequest() throws RequestException {
         String userFoursquareId = getRequest().getString(RequestConstants.USER_FOURSQUARE_ID);
-        logger.debug("Get infor for user with foursquare id: " + userFoursquareId);
-
-        user = userDao.getUserByFoursquareId(userFoursquareId);
-        logger.debug("User found: " + user);
+        logger.info("Get info for user with foursquare id: " + userFoursquareId);
+        user = userRepository.findByFoursquareId(userFoursquareId);
+        logger.info("User found: " + user);
     }
 
     @Override

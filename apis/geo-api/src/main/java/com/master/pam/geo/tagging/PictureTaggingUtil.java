@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class PictureTaggingUtil {
 
-    public static final PictureTags getGeoLocation(BufferedInputStream aInputStream) throws ImageProcessingException, IOException {
+    public static PictureTags getGeoLocation(BufferedInputStream aInputStream) throws ImageProcessingException, IOException {
         Metadata metadata = ImageMetadataReader.readMetadata(aInputStream, false);
 
         GpsDirectory gpsDirectory = metadata.getDirectory(GpsDirectory.class);
@@ -35,8 +35,6 @@ public class PictureTaggingUtil {
         ExifSubIFDDirectory dateDirectory = metadata.getDirectory(ExifSubIFDDirectory.class);
         Date dateTaken = dateDirectory.getDate(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED);
 
-        PictureTags result = new PictureTags(geoPoint, dateTaken);
-
-        return result;
+        return new PictureTags(geoPoint, dateTaken);
     }
 }
