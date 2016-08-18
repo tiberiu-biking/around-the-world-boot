@@ -5,7 +5,7 @@
     <parent>
         <artifactId>apis</artifactId>
         <groupId>com.tpo.world</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>dropbox-api</artifactId>
@@ -14,12 +14,14 @@
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.tpo.world</groupId>
             <artifactId>geo-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

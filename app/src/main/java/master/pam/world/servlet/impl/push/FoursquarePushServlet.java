@@ -2,8 +2,8 @@ package master.pam.world.servlet.impl.push;
 
 import com.tpo.world.domain.entity.MarkerEntity;
 import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.domain.util.GsonHelper;
 import fi.foyt.foursquare.api.entities.Checkin;
-import master.pam.crosscutting.gson.GsonHelper;
 import master.pam.crosscutting.notifications.NotificationPool;
 import master.pam.foursquare.api.util.FoursquareUtil;
 import master.pam.server.api.ServerActionsEnum;

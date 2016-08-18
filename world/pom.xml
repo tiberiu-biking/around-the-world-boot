@@ -6,7 +6,7 @@
     <parent>
         <artifactId>around-the-world-boot</artifactId>
         <groupId>com.tpo.world</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>world</artifactId>

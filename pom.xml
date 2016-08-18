@@ -5,12 +5,13 @@
 
     <groupId>com.tpo.world</groupId>
     <artifactId>around-the-world-boot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>domain</module>
+        <module>model</module>
         <module>apis</module>
+        <module>encryption</module>
         <module>persistence</module>
         <module>server</module>
         <module>world</module>
@@ -36,29 +37,8 @@
                 <version>1.4.0.RELEASE</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.tpo.world</groupId>
-                <artifactId>domain</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.tpo.world</groupId>
-                <artifactId>geo-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-
-    </dependencies>
 
     <build>
         <plugins>

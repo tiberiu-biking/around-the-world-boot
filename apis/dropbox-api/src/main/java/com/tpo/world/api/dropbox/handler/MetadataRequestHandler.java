@@ -5,7 +5,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestUtil.ResponseHandler;
 import com.dropbox.core.http.HttpRequestor.Response;
 import com.tpo.world.api.dropbox.gson.MediaInfoMetadata;
-import master.pam.crosscutting.gson.GsonHelper;
+import com.tpo.world.domain.util.GsonHelper;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

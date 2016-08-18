@@ -1,6 +1,6 @@
 package master.pam.world.servlet.base;
 
-import master.pam.crosscutting.gson.GsonHelper;
+import com.tpo.world.domain.util.GsonHelper;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.server.IServer;

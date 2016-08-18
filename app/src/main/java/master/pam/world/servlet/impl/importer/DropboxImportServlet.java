@@ -2,7 +2,7 @@ package master.pam.world.servlet.impl.importer;
 
 import com.dropbox.core.DbxException;
 import com.tpo.world.api.dropbox.api.IDropboxSource;
-import master.pam.crosscutting.gson.GsonHelper;
+import com.tpo.world.domain.util.GsonHelper;
 import master.pam.server.api.ServerActionsEnum;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
