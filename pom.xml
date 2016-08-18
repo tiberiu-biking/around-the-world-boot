@@ -10,11 +10,11 @@
 
     <modules>
         <module>model</module>
-        <module>apis</module>
         <module>encryption</module>
+        <module>geo</module>
+        <module>apis</module>
         <module>persistence</module>
         <module>server</module>
-        <module>world</module>
         <module>app</module>
     </modules>
 

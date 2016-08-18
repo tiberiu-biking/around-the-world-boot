@@ -1,8 +1,8 @@
 package master.pam.server.impl.response.impl.user;
 
-import com.master.pam.encrypt.util.hash.HashUtil;
-import com.tpo.world.domain.entity.PasswordEntity;
-import com.tpo.world.domain.entity.UserEntity;
+import com.master.pam.encrypt.api.Encryptor;
+import com.tpo.world.model.entity.PasswordEntity;
+import com.tpo.world.model.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
@@ -17,11 +17,13 @@ public class CreateUserResponse extends AbstractResponse {
     private UserEntity newUser;
     private UserRepository userRepository;
     private PasswordRepository passwordRepository;
+    private Encryptor encryptor;
 
-    public CreateUserResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository) {
+    public CreateUserResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, Encryptor encryptor) {
         super(aRequest);
         this.userRepository = userRepository;
         this.passwordRepository = passwordRepository;
+        this.encryptor = encryptor;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class CreateUserResponse extends AbstractResponse {
             String password = getRequest().getString(RequestConstants.PASSWORD);
             PasswordEntity passwordEntity = new PasswordEntity();
             passwordEntity.setUserId(newUser.getId());
-            passwordEntity.setPassword(HashUtil.getHash(password));
+            passwordEntity.setPassword(encryptor.hash(password));
             passwordRepository.saveAndFlush(passwordEntity);
         }
     }

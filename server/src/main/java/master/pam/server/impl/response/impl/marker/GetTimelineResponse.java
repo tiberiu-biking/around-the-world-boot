@@ -1,10 +1,9 @@
 package master.pam.server.impl.response.impl.marker;
 
-import com.tpo.world.domain.entity.MarkerEntity;
-import com.tpo.world.domain.util.DateFormatUtil;
+import com.tpo.world.model.entity.MarkerEntity;
+import com.tpo.world.model.timeline.TimelineItemDto;
+import com.tpo.world.model.util.DateFormatUtil;
 import com.tpo.world.persistence.repository.MarkerRepository;
-import master.pam.crosscutting.dto.api.ITimelineItemDto;
-import master.pam.crosscutting.dto.timeline.TimelineItemDto;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;
 import master.pam.server.api.response.ResponseConstants;
@@ -22,7 +21,7 @@ public class GetTimelineResponse extends AbstractResponse {
     private static final Logger logger = LoggerFactory.getLogger(GetTimelineResponse.class);
 
     private MarkerRepository markerRepository;
-    private List<ITimelineItemDto> timeline;
+    private List<TimelineItemDto> timeline;
 
     public GetTimelineResponse(IServerRequest aRequest, MarkerRepository markerRepository) {
         super(aRequest);

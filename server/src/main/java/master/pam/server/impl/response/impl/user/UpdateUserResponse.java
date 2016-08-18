@@ -1,8 +1,8 @@
 package master.pam.server.impl.response.impl.user;
 
-import com.master.pam.encrypt.util.hash.HashUtil;
-import com.tpo.world.domain.entity.PasswordEntity;
-import com.tpo.world.domain.entity.UserEntity;
+import com.master.pam.encrypt.api.Encryptor;
+import com.tpo.world.model.entity.PasswordEntity;
+import com.tpo.world.model.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
@@ -15,14 +15,16 @@ import org.apache.commons.lang3.StringUtils;
 
 public class UpdateUserResponse extends AbstractResponse {
 
-    private final UserRepository userRepository;
-    private final PasswordRepository passwordRepository;
+    private UserRepository userRepository;
+    private PasswordRepository passwordRepository;
+    private Encryptor encryptor;
     private UserEntity updatedUser;
 
-    public UpdateUserResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository) {
+    public UpdateUserResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, Encryptor encryptor) {
         super(aRequest);
         this.userRepository = userRepository;
         this.passwordRepository = passwordRepository;
+        this.encryptor = encryptor;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class UpdateUserResponse extends AbstractResponse {
         String newPassword = getRequest().getString(RequestConstants.PASSWORD);
         if (!StringUtils.isEmpty(newPassword)) {
             PasswordEntity password = new PasswordEntity();
-            password.setPassword(HashUtil.getHash(newPassword));
+            password.setPassword(encryptor.hash(newPassword));
             password.setUserId(updatedUser.getId());
             passwordRepository.saveAndFlush(password);
         }

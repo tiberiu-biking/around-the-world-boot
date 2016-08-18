@@ -1,8 +1,8 @@
 package master.pam.server.impl.response.impl.user;
 
-import com.master.pam.encrypt.api.IEncryptApi;
-import com.tpo.world.domain.entity.PasswordEntity;
-import com.tpo.world.domain.entity.UserEntity;
+import com.master.pam.encrypt.api.Encryptor;
+import com.tpo.world.model.entity.PasswordEntity;
+import com.tpo.world.model.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
@@ -21,20 +21,20 @@ public class SignInResponse extends AbstractResponse {
     private UserRepository userRepository;
     private UserEntity userEntity;
     private PasswordRepository passwordRepository;
-    private IEncryptApi encryptApi;
+    private Encryptor encryptorApi;
 
-    public SignInResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, IEncryptApi encryptApi) {
+    public SignInResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, Encryptor encryptorApi) {
         super(aRequest);
         this.userRepository = userRepository;
         this.passwordRepository = passwordRepository;
-        this.encryptApi = encryptApi;
+        this.encryptorApi = encryptorApi;
     }
 
     @Override
     public void doRequest() throws RequestException {
         String username = getRequest().getString(RequestConstants.USERNAME);
         String password = getRequest().getString(RequestConstants.PASSWORD);
-        String hashedPassword = encryptApi.hash(password);
+        String hashedPassword = encryptorApi.hash(password);
 
         logger.info("Try to login user: " + username + "/" + password + "/" + hashedPassword);
 

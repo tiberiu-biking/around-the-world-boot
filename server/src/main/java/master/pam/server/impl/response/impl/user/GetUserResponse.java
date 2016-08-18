@@ -1,6 +1,6 @@
 package master.pam.server.impl.response.impl.user;
 
-import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.model.entity.UserEntity;
 import com.tpo.world.persistence.repository.UserRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.request.RequestConstants;

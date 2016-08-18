@@ -4,13 +4,13 @@ import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxRequestUtil;
-import com.master.pam.geo.coding.api.IGeoCodingAPI;
 import com.tpo.world.api.dropbox.api.IDropboxSource;
 import com.tpo.world.api.dropbox.gson.MediaInfoMetadata;
 import com.tpo.world.api.dropbox.handler.MetadataRequestHandler;
-import com.tpo.world.domain.entity.MarkerEntity;
-import com.tpo.world.domain.util.DateFormatUtil;
-import master.pam.crosscutting.dto.impl.AddressDto;
+import com.tpo.world.geo.coding.api.IGeoCodingAPI;
+import com.tpo.world.model.address.Address;
+import com.tpo.world.model.entity.MarkerEntity;
+import com.tpo.world.model.util.DateFormatUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class DropboxSource implements IDropboxSource {
                 markerEntity.setDate(Calendar.getInstance().getTime());
                 markerEntity.setExternalId(dropboxFile);
 
-                AddressDto address = geoCodingAPI.getAddress(markerEntity.getLatitude(), markerEntity.getLongitude());
+                Address address = geoCodingAPI.getAddress(markerEntity.getLatitude(), markerEntity.getLongitude());
                 markerEntity.setName(address.getShortAddress());
                 markerEntity.setUserId(aUserId);
                 markerEntity.setNote("Imported from Dropbox picture");

@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>geo-api</artifactId>
+            <artifactId>geo</artifactId>
             <version>${project.version}</version>
         </dependency>
 

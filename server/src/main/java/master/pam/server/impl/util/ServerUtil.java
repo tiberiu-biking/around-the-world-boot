@@ -1,7 +1,7 @@
 package master.pam.server.impl.util;
 
-import com.tpo.world.domain.entity.MarkerEntity;
-import master.pam.crosscutting.geo.GeoPoint;
+import com.tpo.world.model.entity.MarkerEntity;
+import com.tpo.world.model.geo.GeoPoint;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package master.pam.server.impl.request;
 
-import com.master.pam.encrypt.api.IEncryptApi;
+import com.master.pam.encrypt.api.Encryptor;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
@@ -15,16 +15,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RequestFactory {
+
     private final static Logger log = LoggerFactory.getLogger(RequestFactory.class);
+
     private final UserRepository userRepository;
     private final PasswordRepository passwordRepository;
-    private IEncryptApi encryptApi;
+    private Encryptor encryptor;
     private MarkerRepository markerRepository;
 
-    public RequestFactory(UserRepository userRepository, PasswordRepository passwordRepository, MarkerRepository markerRepository, IEncryptApi encryptApi) {
+    public RequestFactory(UserRepository userRepository, PasswordRepository passwordRepository, MarkerRepository markerRepository, Encryptor encryptor) {
         this.userRepository = userRepository;
         this.passwordRepository = passwordRepository;
-        this.encryptApi = encryptApi;
+        this.encryptor = encryptor;
         this.markerRepository = markerRepository;
     }
 
@@ -34,7 +36,7 @@ public class RequestFactory {
             log.debug("Create result from factory for request: " + aRequest.getAction());
 
             if (aRequest.getAction() == ServerActionsEnum.SIGN_IN) {
-                return new SignInResponse(aRequest, userRepository, passwordRepository, encryptApi).getResponse();
+                return new SignInResponse(aRequest, userRepository, passwordRepository, encryptor).getResponse();
             } else if (aRequest.getAction() == ServerActionsEnum.GET_MARKERS) {
                 return new GetMarkersResponse(aRequest, markerRepository).getResponse();
             } else if (aRequest.getAction() == ServerActionsEnum.GET_TIMELINE) {
@@ -48,11 +50,11 @@ public class RequestFactory {
             } else if (aRequest.getAction() == ServerActionsEnum.GET_USER_INFO_BY_FOURSQUAREID) {
                 return new GetUserByFoursquareIdResponse(aRequest, userRepository).getResponse();
             } else if (aRequest.getAction() == ServerActionsEnum.CREATE_USER) {
-                return new CreateUserResponse(aRequest, userRepository, passwordRepository).getResponse();
+                return new CreateUserResponse(aRequest, userRepository, passwordRepository, encryptor).getResponse();
             } else if (aRequest.getAction() == ServerActionsEnum.GET_USER_INFO) {
                 return new GetUserResponse(aRequest, userRepository).getResponse();
             } else if (aRequest.getAction() == ServerActionsEnum.UPDATE_USER) {
-                return new UpdateUserResponse(aRequest, userRepository, passwordRepository).getResponse();
+                return new UpdateUserResponse(aRequest, userRepository, passwordRepository, encryptor).getResponse();
             } else {
                 throw new RequestException("No such action: " + aRequest.getAction());
             }

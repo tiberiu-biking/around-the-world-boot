@@ -1,6 +1,6 @@
 package master.pam.server;
 
-import com.master.pam.encrypt.api.IEncryptApi;
+import com.master.pam.encrypt.api.Encryptor;
 import com.tpo.world.persistence.PersistenceConfig;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import com.tpo.world.persistence.repository.PasswordRepository;
@@ -27,7 +27,7 @@ public class ServerConfig {
     }
 
     @Bean
-    public RequestFactory requestFactory(MarkerRepository markerRepository, UserRepository userRepository, PasswordRepository passwordRepository, IEncryptApi encryptApi) {
-        return new RequestFactory(userRepository, passwordRepository, markerRepository, encryptApi);
+    public RequestFactory requestFactory(MarkerRepository markerRepository, UserRepository userRepository, PasswordRepository passwordRepository, Encryptor encryptorApi) {
+        return new RequestFactory(userRepository, passwordRepository, markerRepository, encryptorApi);
     }
 }

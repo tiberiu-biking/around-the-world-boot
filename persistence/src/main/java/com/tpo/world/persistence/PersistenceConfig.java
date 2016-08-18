@@ -1,6 +1,6 @@
 package com.tpo.world.persistence;
 
-import com.tpo.world.domain.entity.IdEntity;
+import com.tpo.world.model.entity.IdEntity;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;

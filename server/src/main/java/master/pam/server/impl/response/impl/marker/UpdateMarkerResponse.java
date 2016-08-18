@@ -1,6 +1,6 @@
 package master.pam.server.impl.response.impl.marker;
 
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.model.entity.MarkerEntity;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import master.pam.server.api.request.IServerRequest;
 import master.pam.server.api.response.ResponseConstants;

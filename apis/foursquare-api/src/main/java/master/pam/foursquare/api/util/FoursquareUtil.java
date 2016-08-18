@@ -1,6 +1,6 @@
 package master.pam.foursquare.api.util;
 
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.model.entity.MarkerEntity;
 import fi.foyt.foursquare.api.entities.Checkin;
 import fi.foyt.foursquare.api.entities.CompactVenue;
 
