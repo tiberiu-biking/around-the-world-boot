@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PasswordRepository extends JpaRepository<PasswordEntity, Long> {
+
     PasswordEntity findByUserId(long id);
+
 }

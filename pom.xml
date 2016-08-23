@@ -14,8 +14,7 @@
         <module>geo</module>
         <module>apis</module>
         <module>persistence</module>
-        <module>server</module>
-        <module>app</module>
+        <module>web</module>
     </modules>
 
     <name>around-the-world-boot</name>
