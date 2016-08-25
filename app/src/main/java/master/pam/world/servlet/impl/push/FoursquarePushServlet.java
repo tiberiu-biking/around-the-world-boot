@@ -1,17 +1,17 @@
 package master.pam.world.servlet.impl.push;
 
+import com.tpo.world.api.foursquare.util.FoursquareUtil;
+import com.tpo.world.api.geo.notifications.NotificationPool;
 import com.tpo.world.domain.entity.MarkerEntity;
 import com.tpo.world.domain.entity.UserEntity;
 import com.tpo.world.domain.util.GsonHelper;
+import com.tpo.world.web.api.ServerActionsEnum;
+import com.tpo.world.web.api.request.IServerRequest;
+import com.tpo.world.web.api.request.RequestConstants;
+import com.tpo.world.web.api.response.ResponseConstants;
+import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
 import fi.foyt.foursquare.api.entities.Checkin;
-import master.pam.crosscutting.notifications.NotificationPool;
-import master.pam.foursquare.api.util.FoursquareUtil;
-import master.pam.server.api.ServerActionsEnum;
-import master.pam.server.api.request.IServerRequest;
-import master.pam.server.api.request.RequestConstants;
-import master.pam.server.api.response.ResponseConstants;
-import master.pam.server.api.server.IServer;
-import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import master.pam.world.servlet.exception.WrongRequestException;
 import org.slf4j.Logger;

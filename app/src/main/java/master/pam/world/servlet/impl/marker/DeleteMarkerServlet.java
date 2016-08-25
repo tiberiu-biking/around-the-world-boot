@@ -1,9 +1,9 @@
 package master.pam.world.servlet.impl.marker;
 
-import master.pam.server.api.ServerActionsEnum;
-import master.pam.server.api.request.IServerRequest;
-import master.pam.server.api.request.RequestConstants;
-import master.pam.server.api.server.IServer;
+import com.tpo.world.web.api.ServerActionsEnum;
+import com.tpo.world.web.api.request.IServerRequest;
+import com.tpo.world.web.api.request.RequestConstants;
+import com.tpo.world.web.api.server.IServer;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
 package master.pam.world.servlet.exception;
 
-import master.pam.server.impl.response.base.envelope.IResponseEnvelope;
+import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
 
 public class WrongRequestException extends Exception {
 

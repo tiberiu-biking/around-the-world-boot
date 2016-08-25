@@ -1,7 +1,7 @@
 package master.pam.world.servlet.impl.user;
 
-import master.pam.crosscutting.notifications.NotificationPool;
-import master.pam.server.api.request.RequestConstants;
+import com.tpo.world.api.geo.notifications.NotificationPool;
+import com.tpo.world.web.api.request.RequestConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

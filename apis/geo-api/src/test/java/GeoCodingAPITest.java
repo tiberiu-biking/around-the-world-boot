@@ -1,5 +1,5 @@
-import com.master.pam.geo.coding.api.impl.GeoCodingAPI;
-import master.pam.crosscutting.geo.GeoPoint;
+import com.tpo.world.api.geo.coding.api.impl.GeoCodingAPI;
+import com.tpo.world.api.geo.geo.GeoPoint;
 
 public class GeoCodingAPITest {
 

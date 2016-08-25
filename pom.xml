@@ -14,7 +14,6 @@
         <module>encryption</module>
         <module>persistence</module>
         <module>server</module>
-        <module>world</module>
         <module>app</module>
     </modules>
 
