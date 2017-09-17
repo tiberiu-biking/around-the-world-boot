@@ -24,7 +24,7 @@ public class MarkerEntity extends IdEntity {
     @Column
     private String note;
 
-    @Column
+    @Column(name = "userid")
     private Long userId;
 
     @Column

@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>foursquare-api</module>
+        <!-- <module>foursquare-api</module> -->
         <module>dropbox-api</module>
         <module>geo-api</module>
     </modules>

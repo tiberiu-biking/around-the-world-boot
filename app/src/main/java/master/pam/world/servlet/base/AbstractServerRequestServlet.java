@@ -5,8 +5,6 @@ import com.tpo.world.web.api.ServerActionsEnum;
 import com.tpo.world.web.api.request.IServerRequest;
 import com.tpo.world.web.api.server.IServer;
 import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
-import master.pam.world.gson.PasswordExclusionStrategy;
-import master.pam.world.gson.RelationsExclusionStrategy;
 import master.pam.world.servlet.exception.WrongRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,7 +95,7 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
     }
 
     protected String buildGson(IResponseEnvelope aResponseEnvelope) {
-        return GsonHelper.toGson(aResponseEnvelope, new RelationsExclusionStrategy(), new PasswordExclusionStrategy());
+        return GsonHelper.toGson(aResponseEnvelope);
     }
 
     public IServer getServer() {

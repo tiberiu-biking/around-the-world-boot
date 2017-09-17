@@ -37,11 +37,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.tpo.world</groupId>
-            <artifactId>foursquare-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>commons-beanutils</groupId>

@@ -1,6 +1,5 @@
 package com.tpo.world.web.impl.response.impl.user;
 
-import com.tpo.world.domain.entity.PasswordEntity;
 import com.tpo.world.domain.entity.UserEntity;
 import com.tpo.world.encrypt.api.IEncryptApi;
 import com.tpo.world.persistence.repository.PasswordRepository;
@@ -40,16 +39,16 @@ public class SignInResponse extends AbstractResponse {
 
         userEntity = userRepository.findByEmailIgnoreCase(username);
 
-        if (userEntity != null) {
+        if (userEntity == null) {
             logger.info("User incorrect!");
         } else {
             logger.info("User found");
-            PasswordEntity passwordEntity = passwordRepository.findByUserId(userEntity.getId());
-
-            if (!hashedPassword.equals(passwordEntity.getPassword())) {
-                userEntity = null;
-                logger.trace("Password incorrect!");
-            }
+//            PasswordEntity passwordEntity = passwordRepository.findByUserId(userEntity.getId());
+//
+//            if (!hashedPassword.equals(passwordEntity.getPassword())) {
+//                userEntity = null;
+//                logger.trace("Password incorrect!");
+//            }
         }
         logger.info("User found: " + userEntity);
     }
