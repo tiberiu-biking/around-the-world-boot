@@ -1,11 +1,16 @@
 package com.tpo.world.domain.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PASSWORDS")
+@Getter
+@Setter
 public class PasswordEntity extends IdEntity {
 
     @Column
@@ -13,20 +18,4 @@ public class PasswordEntity extends IdEntity {
 
     @Column
     private String password;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long aUserId) {
-        this.userId = aUserId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String aPassword) {
-        this.password = aPassword;
-    }
 }

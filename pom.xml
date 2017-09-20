@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>model</module>
+        <module>atw-core</module>
         <module>apis</module>
         <module>encryption</module>
         <module>persistence</module>
