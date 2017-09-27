@@ -1,6 +1,6 @@
 package com.tpo.world.persistence.repository;
 
-import com.tpo.world.domain.entity.UserEntity;
+import com.tpo.world.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

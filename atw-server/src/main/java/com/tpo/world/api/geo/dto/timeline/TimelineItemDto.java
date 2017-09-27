@@ -1,7 +1,7 @@
 package com.tpo.world.api.geo.dto.timeline;
 
 import com.tpo.world.api.geo.dto.api.ITimelineItemDto;
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.entity.MarkerEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.tpo.world.persistence.repository;
 
-import com.tpo.world.domain.entity.PasswordEntity;
+import com.tpo.world.persistence.entity.PasswordEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

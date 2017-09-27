@@ -6,7 +6,7 @@ import com.tpo.world.api.geo.dto.impl.IAddressDto;
 import com.tpo.world.api.geo.geo.GeoPoint;
 import com.tpo.world.api.geo.tagging.PictureTaggingUtil;
 import com.tpo.world.api.geo.tagging.PictureTags;
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.entity.MarkerEntity;
 import com.tpo.world.web.api.ServerActionsEnum;
 import com.tpo.world.web.api.request.IServerRequest;
 import com.tpo.world.web.api.request.RequestConstants;

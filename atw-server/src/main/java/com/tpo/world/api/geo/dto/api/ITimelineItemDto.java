@@ -1,7 +1,7 @@
 package com.tpo.world.api.geo.dto.api;
 
 
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.entity.MarkerEntity;
 
 import java.util.List;
 
