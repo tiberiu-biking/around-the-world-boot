@@ -1,6 +1,6 @@
-package com.tpo.world.encrypt;
+package com.tpo.world.core.encrypt;
 
-import com.tpo.world.encrypt.util.hash.HashUtil;
+import com.tpo.world.core.encrypt.util.hash.HashUtil;
 import org.junit.Test;
 
 public class AESEncryptServiceTest {

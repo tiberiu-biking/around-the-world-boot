@@ -1,6 +1,6 @@
 package master.pam.world.servlet.impl.user;
 
-import com.tpo.world.domain.util.GsonHelper;
+import com.tpo.world.core.util.GsonHelper;
 import com.tpo.world.persistence.entity.UserEntity;
 import com.tpo.world.web.api.ServerActionsEnum;
 import com.tpo.world.web.api.request.IServerRequest;

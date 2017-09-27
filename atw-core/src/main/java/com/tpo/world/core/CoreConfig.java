@@ -1,7 +1,7 @@
 package com.tpo.world.core;
 
-import com.tpo.world.encrypt.api.AESEncryptService;
-import com.tpo.world.encrypt.api.EncryptService;
+import com.tpo.world.core.encrypt.api.AESEncryptService;
+import com.tpo.world.core.encrypt.api.EncryptService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

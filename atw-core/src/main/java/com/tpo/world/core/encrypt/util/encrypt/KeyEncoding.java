@@ -1,4 +1,4 @@
-package com.tpo.world.encrypt.util.encrypt;
+package com.tpo.world.core.encrypt.util.encrypt;
 
 public enum KeyEncoding {
 

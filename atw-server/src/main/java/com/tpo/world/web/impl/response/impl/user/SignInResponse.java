@@ -1,6 +1,6 @@
 package com.tpo.world.web.impl.response.impl.user;
 
-import com.tpo.world.encrypt.api.EncryptService;
+import com.tpo.world.core.encrypt.api.EncryptService;
 import com.tpo.world.persistence.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.tpo.world.encrypt;
+package com.tpo.world.core.encrypt;
 
 import org.junit.Rule;
 import org.junit.Test;

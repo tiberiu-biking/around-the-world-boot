@@ -1,6 +1,6 @@
 package com.tpo.world.web.impl.request;
 
-import com.tpo.world.encrypt.api.EncryptService;
+import com.tpo.world.core.encrypt.api.EncryptService;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;

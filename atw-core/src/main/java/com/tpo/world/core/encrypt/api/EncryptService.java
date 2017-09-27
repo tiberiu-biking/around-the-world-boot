@@ -1,4 +1,4 @@
-package com.tpo.world.encrypt.api;
+package com.tpo.world.core.encrypt.api;
 
 public interface EncryptService {
 

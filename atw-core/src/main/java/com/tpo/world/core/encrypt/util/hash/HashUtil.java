@@ -1,4 +1,4 @@
-package com.tpo.world.encrypt.util.hash;
+package com.tpo.world.core.encrypt.util.hash;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

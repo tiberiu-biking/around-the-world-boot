@@ -1,4 +1,4 @@
-package com.tpo.world.encrypt.util.encrypt;
+package com.tpo.world.core.encrypt.util.encrypt;
 
 import java.io.FileInputStream;
 import java.io.IOException;

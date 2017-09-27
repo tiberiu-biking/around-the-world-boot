@@ -1,8 +1,8 @@
-package com.tpo.world.encrypt.api;
+package com.tpo.world.core.encrypt.api;
 
-import com.tpo.world.encrypt.util.encrypt.AESCipher;
-import com.tpo.world.encrypt.util.encrypt.KeystoreUtil;
-import com.tpo.world.encrypt.util.hash.HashUtil;
+import com.tpo.world.core.encrypt.util.encrypt.AESCipher;
+import com.tpo.world.core.encrypt.util.encrypt.KeystoreUtil;
+import com.tpo.world.core.encrypt.util.hash.HashUtil;
 
 import java.security.Key;
 
