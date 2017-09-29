@@ -1,10 +1,10 @@
 package com.tpo.world.web.impl.response.impl.user;
 
-import com.tpo.world.core.encrypt.util.hash.HashUtil;
 import com.tpo.world.persistence.entity.PasswordEntity;
 import com.tpo.world.persistence.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
+import com.tpo.world.services.encrypt.util.hash.HashUtil;
 import com.tpo.world.web.api.request.IServerRequest;
 import com.tpo.world.web.api.request.RequestConstants;
 import com.tpo.world.web.api.response.ResponseConstants;

@@ -1,7 +1,7 @@
 package com.tpo.world.api.dropbox.api;
 
 import com.dropbox.core.DbxException;
-import com.tpo.world.domain.entity.MarkerEntity;
+import com.tpo.world.persistence.entity.MarkerEntity;
 
 import java.util.List;
 

@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>atw-core</module>
-        <module>atw-apis</module>
         <module>atw-persistence</module>
+        <module>atw-services</module>
+        <module>atw-apis</module>
         <module>atw-server</module>
         <module>atw-app</module>
     </modules>

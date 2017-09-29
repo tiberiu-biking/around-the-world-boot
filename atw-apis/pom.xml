@@ -16,8 +16,8 @@
 
     <modules>
         <!-- <module>foursquare-api</module> -->
-        <module>atw-dropbox-api</module>
         <module>atw-geo-api</module>
+        <module>atw-dropbox-api</module>
     </modules>
 
 </project>

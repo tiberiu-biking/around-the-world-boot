@@ -15,13 +15,13 @@
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>atw-services</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.tpo.world</groupId>
-            <artifactId>geo-api</artifactId>
+            <artifactId>atw-geo-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 

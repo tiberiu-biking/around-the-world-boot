@@ -1,7 +1,7 @@
 package master.pam.world.servlet.impl.marker;
 
-import com.tpo.world.core.util.GsonHelper;
 import com.tpo.world.persistence.entity.MarkerEntity;
+import com.tpo.world.services.util.GsonHelper;
 import com.tpo.world.web.api.ServerActionsEnum;
 import com.tpo.world.web.api.request.IServerRequest;
 import com.tpo.world.web.api.request.RequestConstants;

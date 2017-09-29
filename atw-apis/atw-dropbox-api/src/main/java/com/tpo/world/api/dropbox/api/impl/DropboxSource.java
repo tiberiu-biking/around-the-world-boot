@@ -9,8 +9,8 @@ import com.tpo.world.api.dropbox.gson.MediaInfoMetadata;
 import com.tpo.world.api.dropbox.handler.MetadataRequestHandler;
 import com.tpo.world.api.geo.coding.api.IGeoCodingAPI;
 import com.tpo.world.api.geo.dto.impl.AddressDto;
-import com.tpo.world.domain.entity.MarkerEntity;
-import com.tpo.world.domain.util.DateFormatUtil;
+import com.tpo.world.persistence.entity.MarkerEntity;
+import com.tpo.world.services.util.DateFormatUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
