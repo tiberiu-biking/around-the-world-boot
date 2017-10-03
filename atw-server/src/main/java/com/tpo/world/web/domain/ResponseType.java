@@ -1,4 +1,4 @@
-package com.tpo.world.web.api.response;
+package com.tpo.world.web.domain;
 
 public enum ResponseType {
 

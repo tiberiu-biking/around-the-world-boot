@@ -1,4 +1,4 @@
-package com.tpo.world.api.geo.geo;
+package com.tpo.world.model.geo;
 
 import java.math.BigDecimal;
 

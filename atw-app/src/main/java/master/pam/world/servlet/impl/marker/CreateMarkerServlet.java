@@ -2,10 +2,10 @@ package master.pam.world.servlet.impl.marker;
 
 import com.tpo.world.persistence.entity.MarkerEntity;
 import com.tpo.world.services.util.GsonHelper;
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Controller
 public class CreateMarkerServlet extends AbstractServerRequestServlet {
 
-    public CreateMarkerServlet(IServer serverIf) {
+    public CreateMarkerServlet(Server serverIf) {
         super(serverIf);
     }
 
@@ -35,13 +35,13 @@ public class CreateMarkerServlet extends AbstractServerRequestServlet {
 
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.ADD_MARKERS;
+    protected ServerAction getServerAction() {
+        return ServerAction.ADD_MARKERS;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
-        aServerRequest.addField(RequestConstants.DTO, GsonHelper.fromGson(getHttpParam(RequestConstants.MARKER), MarkerEntity.class));
+    protected void buildServerRequest(ServerRequest aServerRequest) {
+        aServerRequest.addField(Constants.DTO, GsonHelper.fromGson(getHttpParam(Constants.MARKER), MarkerEntity.class));
     }
 
 }

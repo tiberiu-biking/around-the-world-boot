@@ -1,31 +1,28 @@
 package com.tpo.world.web.impl.request;
 
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServerRequest implements IServerRequest {
+@Slf4j
+public class InternalServerRequest implements ServerRequest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ServerRequest.class);
-
-    private ServerActionsEnum action;
-
+    private ServerAction action;
     private Map<String, Object> fields;
 
     @Override
-    public void setAction(ServerActionsEnum aAction) {
+    public void setAction(ServerAction aAction) {
         action = aAction;
-        fields = new HashMap<String, Object>();
+        fields = new HashMap<>();
     }
 
     @Override
-    public ServerActionsEnum getAction() {
+    public ServerAction getAction() {
         return action;
     }
 
@@ -56,7 +53,7 @@ public class ServerRequest implements IServerRequest {
         try {
             return (T) result;
         } catch (ClassCastException e) {
-            logger.error("Cannot convert field to " + aResultClass.getCanonicalName());
+            log.error("Cannot convert field to " + aResultClass.getCanonicalName());
             // TODO
             e.printStackTrace();
             return null;
@@ -65,12 +62,12 @@ public class ServerRequest implements IServerRequest {
 
     @Override
     public <T> T getDto(Class<T> aClass) {
-        return get(RequestConstants.DTO, aClass);
+        return get(Constants.DTO, aClass);
     }
 
     @Override
     public <T> List<T> getDtoList(Class<T> aClass) {
-        return get(RequestConstants.DTO_LIST, List.class);
+        return get(Constants.DTO_LIST, List.class);
     }
 
     public Map<String, Object> getFields() {
@@ -85,7 +82,7 @@ public class ServerRequest implements IServerRequest {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ServerRequest [action=");
+        builder.append("InternalServerRequest [action=");
         builder.append(action);
         builder.append(", fields=");
         builder.append(fields);

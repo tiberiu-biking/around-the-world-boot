@@ -1,15 +1,17 @@
 package com.tpo.world.web;
 
+import com.tpo.world.api.dropbox.DropboxApiConfig;
+import com.tpo.world.api.geo.GeoApiConfig;
 import com.tpo.world.persistence.PersistenceConfig;
 import com.tpo.world.persistence.repository.MarkerRepository;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
 import com.tpo.world.services.ServicesConfig;
 import com.tpo.world.services.encrypt.EncryptService;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
 import com.tpo.world.web.config.ApisConfig;
 import com.tpo.world.web.impl.request.RequestFactory;
-import com.tpo.world.web.impl.server.Server;
+import com.tpo.world.web.impl.server.InternalServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -19,12 +21,16 @@ import org.springframework.context.annotation.Import;
  * @since 28/07/16.
  */
 @Configuration
-@Import({PersistenceConfig.class, ServicesConfig.class, ApisConfig.class})
+@Import({PersistenceConfig.class,
+        ServicesConfig.class,
+        ApisConfig.class,
+        GeoApiConfig.class,
+        DropboxApiConfig.class})
 public class ServerConfig {
 
     @Bean
-    public IServer server(RequestFactory requestFactory) {
-        return new Server(requestFactory);
+    public Server server(RequestFactory requestFactory) {
+        return new InternalServer(requestFactory);
     }
 
     @Bean

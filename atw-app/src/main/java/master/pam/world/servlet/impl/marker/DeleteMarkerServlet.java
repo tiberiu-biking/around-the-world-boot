@@ -1,9 +1,9 @@
 package master.pam.world.servlet.impl.marker;
 
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class DeleteMarkerServlet extends AbstractServerRequestServlet {
     private static final long serialVersionUID = 7735454047270919067L;
 
-    public DeleteMarkerServlet(IServer serverIf) {
+    public DeleteMarkerServlet(Server serverIf) {
         super(serverIf);
     }
 
@@ -34,12 +34,12 @@ public class DeleteMarkerServlet extends AbstractServerRequestServlet {
 
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.DELETE_MARKER;
+    protected ServerAction getServerAction() {
+        return ServerAction.DELETE_MARKER;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
-        aServerRequest.addLong(RequestConstants.MARKER_ID, Long.parseLong(getHttpParam(RequestConstants.MARKER_ID)));
+    protected void buildServerRequest(ServerRequest aServerRequest) {
+        aServerRequest.addLong(Constants.MARKER_ID, Long.parseLong(getHttpParam(Constants.MARKER_ID)));
     }
 }

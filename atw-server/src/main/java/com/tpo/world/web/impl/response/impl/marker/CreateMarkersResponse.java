@@ -1,22 +1,21 @@
 package com.tpo.world.web.impl.response.impl.marker;
 
+import com.tpo.world.model.exceptions.RequestException;
 import com.tpo.world.persistence.entity.MarkerEntity;
 import com.tpo.world.persistence.repository.MarkerRepository;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.response.ResponseConstants;
-import com.tpo.world.web.api.response.ResponseType;
-import com.tpo.world.web.impl.exceptions.RequestException;
-import com.tpo.world.web.impl.response.base.AbstractResponse;
-import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
-import com.tpo.world.web.impl.util.ServerUtil;
+import com.tpo.world.services.util.Geo;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ResponseType;
+import com.tpo.world.web.impl.response.base.AbstractServerResponse;
+import com.tpo.world.web.impl.response.base.envelope.ResponseEnvelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateMarkersResponse extends AbstractResponse {
+public class CreateMarkersResponse extends AbstractServerResponse {
 
     private final static Logger logger = LoggerFactory.getLogger(CreateMarkersResponse.class);
 
@@ -24,7 +23,7 @@ public class CreateMarkersResponse extends AbstractResponse {
     private List<MarkerEntity> markers;
     private int newMarkers;
 
-    public CreateMarkersResponse(IServerRequest aRequest, MarkerRepository markerRepository) {
+    public CreateMarkersResponse(ServerRequest aRequest, MarkerRepository markerRepository) {
         super(aRequest);
         this.markerRepository = markerRepository;
     }
@@ -50,18 +49,18 @@ public class CreateMarkersResponse extends AbstractResponse {
 
         newMarkers = this.markers.size();
 
-        ResponseType responseType = getRequest().get(RequestConstants.RETURN_TYPE, ResponseType.class);
-        Long userId = getRequest().get(RequestConstants.USER_ID, Long.class);
+        ResponseType responseType = getRequest().get(Constants.RETURN_TYPE, ResponseType.class);
+        Long userId = getRequest().get(Constants.USER_ID, Long.class);
         if (responseType == ResponseType.RETURN_ALL) {
             this.markers = markerRepository.findByUserId(userId);
         }
     }
 
     @Override
-    public void buildResponseEnvelope(IResponseEnvelope aResponseEnvelope) {
+    public void buildResponseEnvelope(ResponseEnvelope aResponseEnvelope) {
         aResponseEnvelope
-                .addData(ResponseConstants.MARKERS, markers)
-                .addData(ResponseConstants.CENTER_POINT, ServerUtil.calculateCenterPoint(markers))
+                .addData(Constants.MARKERS, markers)
+                .addData(Constants.CENTER_POINT, Geo.calculateCenterPoint(markers))
                 .addDataMessage(newMarkers + " new marker(s) added.");
     }
 }

@@ -1,4 +1,4 @@
-package com.tpo.world.web.impl.exceptions;
+package com.tpo.world.model.exceptions;
 
 public class RequestException extends Error {
 

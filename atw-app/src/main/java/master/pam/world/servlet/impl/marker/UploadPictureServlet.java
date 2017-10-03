@@ -3,15 +3,15 @@ package master.pam.world.servlet.impl.marker;
 import com.drew.imaging.ImageProcessingException;
 import com.tpo.world.api.geo.coding.api.IGeoCodingAPI;
 import com.tpo.world.api.geo.dto.impl.IAddressDto;
-import com.tpo.world.api.geo.geo.GeoPoint;
 import com.tpo.world.api.geo.tagging.PictureTaggingUtil;
 import com.tpo.world.api.geo.tagging.PictureTags;
+import com.tpo.world.model.geo.GeoPoint;
 import com.tpo.world.persistence.entity.MarkerEntity;
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
-import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
+import com.tpo.world.web.impl.response.base.envelope.ResponseEnvelope;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
 
     private IGeoCodingAPI geoCodingAPI;
 
-    public UploadPictureServlet(IServer serverIf, IGeoCodingAPI geoCodingAPI) {
+    public UploadPictureServlet(Server serverIf, IGeoCodingAPI geoCodingAPI) {
         super(serverIf);
         this.geoCodingAPI = geoCodingAPI;
     }
@@ -57,12 +57,12 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
     }
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.ADD_MARKERS;
+    protected ServerAction getServerAction() {
+        return ServerAction.ADD_MARKERS;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
+    protected void buildServerRequest(ServerRequest aServerRequest) {
         Collection<Part> parts = getHttpRequestParts();
         isGPSMissing = false;
         List<MarkerEntity> markers = new ArrayList<>();
@@ -84,7 +84,7 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
                     markerEntity.setLongitude(location.getLongitude());
                     markerEntity.setDate(pictureTags.getDateTaken());
 
-                    markerEntity.setUserId(Long.parseLong(getHttpParam(RequestConstants.USER_ID)));
+                    markerEntity.setUserId(Long.parseLong(getHttpParam(Constants.USER_ID)));
                     markerEntity.setNote("Imported from a picture ");
 
                     // geo coding
@@ -98,12 +98,12 @@ public class UploadPictureServlet extends AbstractServerRequestServlet {
                 }
             }
         }
-        aServerRequest.addField(RequestConstants.DTO_LIST, markers);
+        aServerRequest.addField(Constants.DTO_LIST, markers);
 
     }
 
     @Override
-    protected String buildResult(IResponseEnvelope aResponseEnvelope) {
+    protected String buildResult(ResponseEnvelope aResponseEnvelope) {
         if (isGPSMissing) {
             aResponseEnvelope.addDataMessage("Picture(s) doesn't contain GPS information.");
         }

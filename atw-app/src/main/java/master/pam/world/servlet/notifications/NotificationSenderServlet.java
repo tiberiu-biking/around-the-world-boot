@@ -1,6 +1,6 @@
 package master.pam.world.servlet.notifications;
 
-import com.tpo.world.api.geo.notifications.NotificationPool;
+import com.tpo.world.services.notifications.NotificationPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

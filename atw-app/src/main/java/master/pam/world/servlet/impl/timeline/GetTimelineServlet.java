@@ -1,9 +1,9 @@
 package master.pam.world.servlet.impl.timeline;
 
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import java.io.IOException;
 @Controller
 public class GetTimelineServlet extends AbstractServerRequestServlet {
 
-    public GetTimelineServlet(IServer serverIf) {
+    public GetTimelineServlet(Server serverIf) {
         super(serverIf);
     }
 
@@ -32,14 +32,14 @@ public class GetTimelineServlet extends AbstractServerRequestServlet {
     }
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.GET_TIMELINE;
+    protected ServerAction getServerAction() {
+        return ServerAction.GET_TIMELINE;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
-        String userId = getHttpParam(RequestConstants.USER_ID);
-        aServerRequest.addLong(RequestConstants.USER_ID, Long.parseLong(userId));
+    protected void buildServerRequest(ServerRequest aServerRequest) {
+        String userId = getHttpParam(Constants.USER_ID);
+        aServerRequest.addLong(Constants.USER_ID, Long.parseLong(userId));
     }
 
 }

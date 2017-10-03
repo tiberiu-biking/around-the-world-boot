@@ -1,9 +1,9 @@
 package master.pam.world.servlet.impl.marker;
 
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class GetMarkersServlet extends AbstractServerRequestServlet {
 
     private static final long serialVersionUID = 1606559514981505001L;
 
-    public GetMarkersServlet(IServer serverIf) {
+    public GetMarkersServlet(Server serverIf) {
         super(serverIf);
     }
 
@@ -34,19 +34,19 @@ public class GetMarkersServlet extends AbstractServerRequestServlet {
     }
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.GET_MARKERS;
+    protected ServerAction getServerAction() {
+        return ServerAction.GET_MARKERS;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
-        String userId = getHttpParam(RequestConstants.USER_ID);
-        String markerId = getHttpParam(RequestConstants.MARKER_ID);
+    protected void buildServerRequest(ServerRequest aServerRequest) {
+        String userId = getHttpParam(Constants.USER_ID);
+        String markerId = getHttpParam(Constants.MARKER_ID);
 
-        aServerRequest.addLong(RequestConstants.USER_ID, Long.parseLong(userId));
+        aServerRequest.addLong(Constants.USER_ID, Long.parseLong(userId));
 
         if (markerId != null)
-            aServerRequest.addLong(RequestConstants.MARKER_ID, Long.parseLong(markerId));
+            aServerRequest.addLong(Constants.MARKER_ID, Long.parseLong(markerId));
     }
 
 }

@@ -1,11 +1,14 @@
-package com.tpo.world.web.impl.util;
+package com.tpo.world.services.util;
 
-import com.tpo.world.api.geo.geo.GeoPoint;
+import com.tpo.world.model.geo.GeoPoint;
 import com.tpo.world.persistence.entity.MarkerEntity;
 
 import java.util.List;
 
-public class ServerUtil {
+public final class Geo {
+
+    private Geo() {
+    }
 
     public static GeoPoint calculateCenterPoint(List<MarkerEntity> markers) {
         double minLatitude = 9999;

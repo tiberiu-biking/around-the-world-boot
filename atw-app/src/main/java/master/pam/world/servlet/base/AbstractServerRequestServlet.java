@@ -1,10 +1,10 @@
 package master.pam.world.servlet.base;
 
 import com.tpo.world.services.util.GsonHelper;
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.server.IServer;
-import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.domain.ServerAction;
+import com.tpo.world.web.impl.response.base.envelope.ResponseEnvelope;
 import master.pam.world.servlet.exception.WrongRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +23,15 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractServerRequestServlet.class);
     private HttpServletRequest httpRequest;
-    private IServer serverIf;
+    private Server serverIf;
 
-    public AbstractServerRequestServlet(IServer serverIf) {
+    public AbstractServerRequestServlet(Server serverIf) {
         this.serverIf = serverIf;
     }
 
-    abstract protected ServerActionsEnum getServerAction();
+    abstract protected ServerAction getServerAction();
 
-    abstract protected void buildServerRequest(IServerRequest aServerRequest) throws WrongRequestException;
+    abstract protected void buildServerRequest(ServerRequest aServerRequest) throws WrongRequestException;
 
     @Override
     public void doGet(HttpServletRequest aRequest, HttpServletResponse aResponse) throws ServletException, IOException {
@@ -49,13 +49,13 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
     }
 
     protected void doRequest(HttpServletResponse aResponse) throws ServletException, java.io.IOException {
-        logger.info("Server action: " + getServerAction());
+        logger.info("InternalServer action: " + getServerAction());
 
-        IServerRequest serverRequest = serverIf.createRequest();
+        ServerRequest serverRequest = serverIf.createRequest();
 
         serverRequest.setAction(getServerAction());
 
-        IResponseEnvelope resultObj;
+        ResponseEnvelope resultObj;
         try {
             buildServerRequest(serverRequest);
             resultObj = serverIf.sendRequest(serverRequest);
@@ -89,16 +89,16 @@ public abstract class AbstractServerRequestServlet extends HttpServlet {
         }
     }
 
-    protected String buildResult(IResponseEnvelope aResponseEnvelope) {
-        logger.debug("Build result. Server result: " + aResponseEnvelope);
+    protected String buildResult(ResponseEnvelope aResponseEnvelope) {
+        logger.debug("Build result. InternalServer result: " + aResponseEnvelope);
         return buildGson(aResponseEnvelope);
     }
 
-    protected String buildGson(IResponseEnvelope aResponseEnvelope) {
+    protected String buildGson(ResponseEnvelope aResponseEnvelope) {
         return GsonHelper.toGson(aResponseEnvelope);
     }
 
-    public IServer getServer() {
+    public Server getServer() {
         return serverIf;
     }
 }

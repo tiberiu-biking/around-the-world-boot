@@ -1,14 +1,14 @@
-package com.tpo.world.web.api.request;
+package com.tpo.world.web.api;
 
-import com.tpo.world.web.api.ServerActionsEnum;
+import com.tpo.world.web.domain.ServerAction;
 
 import java.util.List;
 
-public interface IServerRequest {
+public interface ServerRequest {
 
-    ServerActionsEnum getAction();
+    ServerAction getAction();
 
-    void setAction(ServerActionsEnum aActionName);
+    void setAction(ServerAction aActionName);
 
     /**
      * Adds a new parameter to the request with the specified value.

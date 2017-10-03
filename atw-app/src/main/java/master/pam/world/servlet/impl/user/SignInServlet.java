@@ -1,9 +1,9 @@
 package master.pam.world.servlet.impl.user;
 
-import com.tpo.world.web.api.ServerActionsEnum;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.server.IServer;
+import com.tpo.world.web.api.Server;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.domain.ServerAction;
 import master.pam.world.servlet.base.AbstractServerRequestServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import java.io.IOException;
 @Controller
 public class SignInServlet extends AbstractServerRequestServlet {
 
-    public SignInServlet(IServer serverIf) {
+    public SignInServlet(Server serverIf) {
         super(serverIf);
     }
 
@@ -32,14 +32,14 @@ public class SignInServlet extends AbstractServerRequestServlet {
     }
 
     @Override
-    protected ServerActionsEnum getServerAction() {
-        return ServerActionsEnum.SIGN_IN;
+    protected ServerAction getServerAction() {
+        return ServerAction.SIGN_IN;
     }
 
     @Override
-    protected void buildServerRequest(IServerRequest aServerRequest) {
-        aServerRequest.addField(RequestConstants.USERNAME, getHttpParam(RequestConstants.USERNAME));
-        aServerRequest.addField(RequestConstants.PASSWORD, getHttpParam(RequestConstants.PASSWORD));
+    protected void buildServerRequest(ServerRequest aServerRequest) {
+        aServerRequest.addField(Constants.USERNAME, getHttpParam(Constants.USERNAME));
+        aServerRequest.addField(Constants.PASSWORD, getHttpParam(Constants.PASSWORD));
     }
 
 }

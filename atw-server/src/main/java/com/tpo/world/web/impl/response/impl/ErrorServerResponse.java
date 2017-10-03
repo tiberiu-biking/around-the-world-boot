@@ -1,15 +1,15 @@
 package com.tpo.world.web.impl.response.impl;
 
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.impl.exceptions.RequestException;
-import com.tpo.world.web.impl.response.base.AbstractResponse;
-import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
+import com.tpo.world.model.exceptions.RequestException;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.impl.response.base.AbstractServerResponse;
+import com.tpo.world.web.impl.response.base.envelope.ResponseEnvelope;
 
-public class ErrorServerResponse extends AbstractResponse {
+public class ErrorServerResponse extends AbstractServerResponse {
 
     private RequestException error;
 
-    public ErrorServerResponse(IServerRequest aRequest, RequestException aException) {
+    public ErrorServerResponse(ServerRequest aRequest, RequestException aException) {
         super(aRequest);
         error = aException;
     }
@@ -19,7 +19,7 @@ public class ErrorServerResponse extends AbstractResponse {
     }
 
     @Override
-    public void buildResponseEnvelope(IResponseEnvelope aResponseEnvelope) {
+    public void buildResponseEnvelope(ResponseEnvelope aResponseEnvelope) {
         aResponseEnvelope.setError(error);
     }
 

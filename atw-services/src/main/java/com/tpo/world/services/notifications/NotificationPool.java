@@ -1,4 +1,4 @@
-package com.tpo.world.api.geo.notifications;
+package com.tpo.world.services.notifications;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

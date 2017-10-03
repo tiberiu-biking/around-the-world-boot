@@ -1,64 +1,41 @@
 package com.tpo.world.web.impl.response.base.envelope;
 
-import com.tpo.world.web.api.response.ResponseConstants;
+public interface ResponseEnvelope {
 
-import java.util.HashMap;
-import java.util.Map;
+    /**
+     * Get result error, meaning there was an error during the request.
+     */
+    Object getError();
 
-public class ResponseEnvelope implements IResponseEnvelope {
+    /**
+     * Get result errors. This is a message as part of the result.
+     */
+    Object getErrors();
 
-    private Object error;
-    private Object errors;
-    private Map<String, Object> data;
+    /**
+     * Get result data.
+     */
+    Object getData();
 
-    public ResponseEnvelope() {
-        data = new HashMap<String, Object>();
-    }
+    /**
+     * Set result errors. This is a message as part of the result.
+     */
+    void setErrors(Object aErrors);
 
-    @Override
-    public Object getErrors() {
-        return errors;
-    }
+    /**
+     * Set the request error, meaning there was an error during the request.
+     */
+    void setError(Object aError);
 
-    @Override
-    public void setErrors(Object errors) {
-        this.errors = errors;
-    }
+    /**
+     * Add data to the result.
+     */
+    ResponseEnvelope addData(String aName, Object aData);
 
-    @Override
-    public Map<String, Object> getData() {
-        return data;
-    }
+    <T> T getData(String aName, Class<T> aClass);
 
-    @Override
-    public IResponseEnvelope addData(String aName, Object aData) {
-        data.put(aName, aData);
-        return this;
-    }
+    void addDataMessage(String string);
 
-    @Override
-    public <T> T getData(String aName, Class<T> aClass) {
-        return (T) data.get(aName);
-    }
-
-    @Override
-    public Object getError() {
-        return error;
-    }
-
-    @Override
-    public void setError(Object error) {
-        this.error = error;
-    }
-
-    @Override
-    public void addDataMessage(String aMessage) {
-        addData(ResponseConstants.MESSAGE, aMessage);
-    }
-
-    @Override
-    public String getDataMessage() {
-        return getData(ResponseConstants.MESSAGE, String.class);
-    }
+    String getDataMessage();
 
 }

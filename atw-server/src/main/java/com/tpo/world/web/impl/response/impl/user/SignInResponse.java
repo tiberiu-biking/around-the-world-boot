@@ -1,19 +1,18 @@
 package com.tpo.world.web.impl.response.impl.user;
 
+import com.tpo.world.model.exceptions.RequestException;
 import com.tpo.world.persistence.entity.UserEntity;
 import com.tpo.world.persistence.repository.PasswordRepository;
 import com.tpo.world.persistence.repository.UserRepository;
 import com.tpo.world.services.encrypt.EncryptService;
-import com.tpo.world.web.api.request.IServerRequest;
-import com.tpo.world.web.api.request.RequestConstants;
-import com.tpo.world.web.api.response.ResponseConstants;
-import com.tpo.world.web.impl.exceptions.RequestException;
-import com.tpo.world.web.impl.response.base.AbstractResponse;
-import com.tpo.world.web.impl.response.base.envelope.IResponseEnvelope;
+import com.tpo.world.web.api.ServerRequest;
+import com.tpo.world.web.constants.Constants;
+import com.tpo.world.web.impl.response.base.AbstractServerResponse;
+import com.tpo.world.web.impl.response.base.envelope.ResponseEnvelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SignInResponse extends AbstractResponse {
+public class SignInResponse extends AbstractServerResponse {
 
     private final Logger logger = LoggerFactory.getLogger(SignInResponse.class);
 
@@ -22,7 +21,7 @@ public class SignInResponse extends AbstractResponse {
     private PasswordRepository passwordRepository;
     private EncryptService encryptApi;
 
-    public SignInResponse(IServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, EncryptService encryptApi) {
+    public SignInResponse(ServerRequest aRequest, UserRepository userRepository, PasswordRepository passwordRepository, EncryptService encryptApi) {
         super(aRequest);
         this.userRepository = userRepository;
         this.passwordRepository = passwordRepository;
@@ -31,8 +30,8 @@ public class SignInResponse extends AbstractResponse {
 
     @Override
     public void doRequest() throws RequestException {
-        String username = getRequest().getString(RequestConstants.USERNAME);
-        String password = getRequest().getString(RequestConstants.PASSWORD);
+        String username = getRequest().getString(Constants.USERNAME);
+        String password = getRequest().getString(Constants.PASSWORD);
         String hashedPassword = encryptApi.hash(password);
 
         logger.info("Try to login user: " + username + "/" + password + "/" + hashedPassword);
@@ -54,14 +53,14 @@ public class SignInResponse extends AbstractResponse {
     }
 
     @Override
-    public void buildResponseEnvelope(IResponseEnvelope aEnvelope) {
+    public void buildResponseEnvelope(ResponseEnvelope aEnvelope) {
         if (userEntity == null) {
             aEnvelope.setErrors("User/password incorrect!");
         } else {
-            aEnvelope.addData(ResponseConstants.USER_ID, userEntity.getId());
-            aEnvelope.addData(ResponseConstants.FIRST_NAME, userEntity.getFirstName());
-            aEnvelope.addData(ResponseConstants.DROPBOX_TOKEN, userEntity.getDropboxToken());
-            aEnvelope.addData(ResponseConstants.FOURSQUARE_TOKEN, userEntity.getFoursquareToken());
+            aEnvelope.addData(Constants.USER_ID, userEntity.getId());
+            aEnvelope.addData(Constants.FIRST_NAME, userEntity.getFirstName());
+            aEnvelope.addData(Constants.DROPBOX_TOKEN, userEntity.getDropboxToken());
+            aEnvelope.addData(Constants.FOURSQUARE_TOKEN, userEntity.getFoursquareToken());
         }
     }
 
